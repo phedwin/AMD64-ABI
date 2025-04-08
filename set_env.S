@@ -25,7 +25,7 @@ Local_loop:
     movq (%rbx), %rsi
     testb %sil, %sil
     jz Local_done
-    
+
 
     addq $8, %rbx
 

@@ -7,7 +7,7 @@ fmt: .asciz "%s\n"
     .globl _start
 _start:
     /* get OS proc arguments */
-    movq 8(%rsp), %rbx /* we have argv at this point */
+    leaq 8(%rsp), %rbx /* we have argv at this point */
     xor %rcx, %rcx
 
 
@@ -19,7 +19,7 @@ _start:
    TL;DR: dont use rax to do any variadic 🌲
 */
 print_argv_until:
-    leaq 0(%rbx,%rcx,8), %rdx
+    movq (%rbx,%rcx,8), %rdx
     testq %rdx, %rdx
 
     /* hey we hit NULL */
@@ -28,7 +28,7 @@ print_argv_until:
     mov %rdx, %rsi
     xor %al, %al /*! clear out so we dont fall into xmm */
     call printf@PLT
-    inc %rcx /* increment our index */
+    addq $8, %rbx
     jmp print_argv_until
 
 .Local_done:

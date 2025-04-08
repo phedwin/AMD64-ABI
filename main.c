@@ -1,99 +1,94 @@
-// #include <pthread.h>
+
+
+/*! process control*/
+
+#include <stdint.h>
 #include <stdio.h>
-// #include <stdlib.h>
-// #include <string.h>
-// #include <unistd.h>
-
-// /* add values in struct*/
-
-// char bufx[1024];
-
-// struct Params {
-// 	int value_a;
-// 	int value_b;
-// };
-
-// void *routine_starts(void *args) {
-// 	struct Params *p = args;
-// 	printf("struct values %d\n", p->value_a + p->value_b);
-// 	pthread_exit(0);
-// }
-
-// // #define _at_exit __attribute__((destructor))
-// void runner() {
-// 	pthread_attr_t attr;
-// 	pthread_t tid;
-
-// 	pthread_attr_init(&attr);
-
-// 	struct Params values = {
-// 		.value_a = 20,
-// 		.value_b = 90,
-// 	};
-
-// 	pthread_create(&tid, &attr, routine_starts, &values);
-
-// 	pthread_join(tid, NULL);
-// 	return;
-// }
-
-// #define BUFFER sysconf(_SC_PAGE_SIZE)
-
-// #include <sys/stat.h>
-// void make_buffer(FILE *fp, char *buf) {
-// 	struct stat stats;
-// 	if (fstat(fp->_fileno, &stats) < 0)
-// 		return;
-// 	size_t file_size = stats.st_size;
-
-// 	setvbuf(fp, NULL, _IOLBF, 4096);
-
-// 	fwrite(buf, 1, file_size, stdout);
-// 	return;
-// }
-
-// /*at_exit*/
-// void finale() {
-// 	printf("\nmain() has reached the end!");
-// }
-
-#include <stdbool.h>
+#include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 
-void verify_env_value_exist(char **envp_t, char *key, bool *status) {
-	int m;
-	for (m = 0; envp_t[m]; m++)
-		if (strcmp(envp_t[m], key) == 0)
-			*status = true;
-	return;
+char temp[] = "/tmp/fileXXXXXX";
+static char *file;
+static int fd;
+
+typedef void (*ExitFunc)(void);
+
+/*proc gen unique filename*/
+char buf_filename[32];
+
+void filename(char *extension) {
+	char *unique_filename = "unix_🌲_";
+	pid_t name = getpid();
+
+	snprintf(buf_filename, sizeof(buf_filename), "%s_%d_.%s",
+		 unique_filename, name, extension);
 }
 
-int main(int argc, char **argv, char **envp) {
-	bool status;
+void clean_routine() {
+	if (unlink(file) < 0)
+		return;
 
-	verify_env_value_exist(envp, "DBUS_SESSION_BUS_ADDRESS", &status);
-	printf("%d", status);
-	return 0;
+	if (close(fd) < 0)
+		return;
+
+	filename("png");
+
+	printf("%s\n", buf_filename);
+
+	if ((fd = mkstemp(temp)) < 0)
+		return;
+	file = temp;
+	char *msg = "phedwin";
+	printf("gen file = %s\n", file);
+	size_t bytes_wr;
+	if ((bytes_wr = write(fd, msg, strlen(msg))) < 0)
+		return;
+
+	atexit(clean_routine);
 }
 
-// void buffer_t(void) {
-// 	char ptr[BUFFER];
+int globvar = 6;
+/* external variable in initialized data */
+char buf[32] = "a write to stdout\n";
 
-// 	char *path = "notes.pl";
+void main(int argc, char **argv) {
+	int var;
+	pid_t pid;
+	/* automatic variable on the stack */
+	var = 88;
 
-// 	FILE *fp = fopen(path, "r");
-// 	if (path == 0)
-// 		return;
+	char *path = argv[1];
+	if (path == 0)
+		return;
 
-// 	/*! this clears buffer, so it prints first considering printf is line */
-// 	/*! bufferred, then sleeps later */
-// 	/*! fclose(stdout); */
+	FILE *fp;
+	fp = fopen(path, "w+");
+	if (fp == 0)
+		return;
 
-// 	size_t read_t;
-// 	if ((read_t = fread(ptr, 1, BUFFER, fp)) < 0)
-// 		return;
+	size_t write_bytes;
 
-// 	make_buffer(fp, ptr);
+	printf("before fork\n");
+	/* we don’t flush stdout */
 
-// 	return;
-// }
+	if ((pid = fork()) < 0) {
+		perror("fork error");
+	} else if (pid == 0) {
+		globvar++; /* modify variables */
+		var++;     /* child */
+	} else {
+		/* parent */
+		sleep(1);
+	}
+
+	write_bytes =
+	    snprintf(buf, sizeof(buf), "pid = %ld, glob = %d, var = %d\n",
+		     (long)getpid(), globvar, var);
+
+	printf("%s\n", buf);
+
+	// if ((write_bytes = fwrite(buf, write_bytes, sizeof(buf), fp)) < 0)
+	// perror("Fwrite");
+	exit(0);
+}

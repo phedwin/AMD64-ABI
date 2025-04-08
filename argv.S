@@ -20,7 +20,7 @@ _start:
     mov (%rbx), %rsi                 # Move the value at the memory location pointed to by %rbx into %rsi.
                                      # Since %rbx holds the address of argv[i], this dereferences the pointer
                                      # and loads the address of the i-th command-line argument string into %rsi.
-    test %rsi, %rsi                  # Test if the value in %rsi is zero (NULL). The argv array is NULL-terminated.
+    testb %sil, %sil                 # Test if the value in %rsi is zero (NULL). The argv array is NULL-terminated.
     je .done                         # If the zero flag is set (meaning %rsi is NULL), jump to the .done label.
 
     lea fmt(%rip), %rdi              # Load the effective address of the format string "fmt" into %rdi.

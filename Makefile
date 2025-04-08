@@ -12,7 +12,7 @@ all: compile
 .PHONY: compile clean asm
 #/* ! Nothing to be done here
 compile: build | build
-	@$(CC) -o $</main.o main.c && ./$</main.o -D name=_POSIX_THREADS use me
+	@$(CC) -o $</main.o algo.c && ./$</main.o log.pl
 clean:
 	@rm -rf *.o *.so *.out *.a build
 build:
@@ -20,4 +20,4 @@ build:
 static: build 
 	$(CC) -static -o $</main.la main.c
 asm: build
-	$(CC) -nostartfiles -o $</program argv.S -lc -no-pie && ./$</program phedwin 
+	$(CC) -nostartfiles -o $</program node.S -lc -no-pie && ./$</program phedwin 

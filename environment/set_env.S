@@ -32,3 +32,10 @@ Local_loop:
 Local_done:
     retq
 
+
+    .global _start
+    .type _start, @function
+_start:
+    xor %dil, %dil
+    call exit@PLT
+

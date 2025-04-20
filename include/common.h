@@ -5,6 +5,7 @@
 
 #include <pthread.h>
 #include <stdbool.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -21,11 +22,5 @@
 extern int setenv_(const char *name, const char *value, int rewrite);
 
 extern void verify_env_value_exist(char **envp_t, char *key, bool *status);
-
-/*! ALGORITHMS */
-
-extern int *two_sum(int *array, size_t size, size_t target);
-extern int buy_sell_stocks(int *prices, int days);
-
 #include <sys/resource.h>
 #endif /*! COMMON_H*/

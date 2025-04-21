@@ -1,5 +1,5 @@
 
-CFLAGS =  -I./include -O3
+CFLAGS =
 ASMFLAGS = -nostartfiles -lc -no-pie
 ifeq ($(OS),Windows_NT)
   $(error  Dude?)

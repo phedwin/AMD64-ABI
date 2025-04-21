@@ -1,28 +1,27 @@
 
 
-#include "common.h"
+#include <stdbool.h>
+#include <stdio.h>
+#include <string.h>
 
-void verify_env_value_exist(char **envp_t, char *key, bool *status) {
-	int g;
-	for (g = 0; envp_t[g]; g++) {
-		/*compare the key, its a key value pair w/ equal seperated!*/
-		if (strncmp(envp_t[g], key, strlen(key)) == 0) {
-			printf("%s\n", envp_t[g]);
+extern char **environ;
+
+void verify_env_value_exist(char *name, char *key, bool *status) {
+	*status = false;
+	for (; *environ; environ++)
+		if (strncmp(*environ, name, strlen(name)) == 0)
 			*status = true;
-			return;
-		}
-	}
 	return;
 }
 
-void main(int argc, char **argv, char **envp) {
+int main(int argc, char **argv, char **envp) {
 	int k;
 	/*! File node.S & argv.S how does main get commandline arguments & env*/
 	/*! what do we increment (%rsp (this), index, scale) or (rsp,
 	 *! index(this), scale); scale is 8, this is my processor width*/
 
 	for (k = 0; argv[k]; k++)
-		printf("id -%d ptr - %p\n", k, (argv + k));
+		printf("id -%d ptr - %p\n", k, argv);
 
 	/*! test results
 	 *   id -0 ptr - 0x7fff39198cd8
@@ -38,6 +37,8 @@ void main(int argc, char **argv, char **envp) {
 
 	bool status;
 
-	verify_env_value_exist(envp, "DBUS_SESSION_BUS_ADDRESS", &status);
-	return;
+	verify_env_value_exist("COLORTERM", "DBUS_SESSION_BUS_ADDRESS",
+			       &status);
+
+	printf("%s\n", status == true ? "true" : "false");
 }

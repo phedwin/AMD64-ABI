@@ -1,7 +1,10 @@
 
 
 #include <bits/posix1_lim.h>
-#include "common.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
 
 /*! process control*/
 

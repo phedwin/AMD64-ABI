@@ -1,41 +1,46 @@
-/*! TODO, from entry _start. Load the envp & save the register across the call to setenv_ 
- *! `Also nice to know envp, are in the higher addresses of memory layout` below below below rsp
- *! the space for envp is fixed & if we deplet it we then need to malloc. 
- */
+    .data
+environ:
+    .quad 0          # make it writable — in real case this is set by loader
 
-    .bss
-    .global ___environ
-data: .skip 8 * 256 // wait is this right? 
-
-    .globl setenv_
-    .type setenv_, @function
+    .text
+    .global setenv_
 setenv_:
-setup:
-    xor %rdi, %rdi /*! key */
-    xor %rsi, %rsi /*! value */
-    /* if rdx is 0, dont change! */
-    testb  %dl, %dl
-    jz Local_done
-    
-    /* else scan the envp & change the key=value */
-    leaq 16(%rsp), %rbx
-    testb %bl, %bl
-    jz Local_done
-Local_loop:
-    movq (%rbx), %rsi
-    testb %sil, %sil
-    jz Local_done
+    push %rbp
+    mov %rsp, %rbp
 
+    # args: rdi = name, rsi = value, rdx = rewrite
+    # build: "name=value" string on stack or heap
 
-    addq $8, %rbx
+    # just a fake example here, you’d normally call snprintf or do it manually
+    # simulate strdup(buf_environ) part
+    # call malloc and copy the string
 
-Local_done:
-    retq
+    # call malloc(size)
+    mov $32, %rdi               # fake fixed size for now
+    call malloc
+    mov %rax, %r12              # r12 = malloced pointer
 
+    # copy "key=value" string to r12
+    # let’s just pretend we already have the full string at rsi
+    mov %rsi, %r13              # r13 = pointer to string "KEY=VALUE"
+copy_loop:
+    movb (%r13), %al
+    movb %al, (%r12)
+    testb %al, %al
+    je done_copy
+    inc %r13
+    inc %r12
+    jmp copy_loop
+done_copy:
 
-    .global _start
-    .type _start, @function
-_start:
-    xor %dil, %dil
-    call exit@PLT
+    # set *environ = new string
+    mov environ(%rip), %rdi     # rdi = environ (pointer to pointer)
+    mov %rax, (%rdi)            # *environ = malloced string
 
+    # set environ[1] = NULL
+    add $8, %rdi                # environ + 8 = second slot
+    mov $0, (%rdi)
+
+    mov $1, %eax                # return 1
+    pop %rbp
+    ret

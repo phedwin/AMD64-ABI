@@ -2,8 +2,7 @@
 
 // the stack setup
 
-#include <stdbool.h>
-#include <stdio.h>
+#include "common.h"
 
 // this goes into void (*init)(void);
 __attribute__((constructor)) void environment(char **envp) {

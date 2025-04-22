@@ -1,5 +1,5 @@
 
-CFLAGS =
+CFLAGS = -Iresearch
 ASMFLAGS = -nostartfiles -lc -no-pie
 ifeq ($(OS),Windows_NT)
   $(error  Dude?)

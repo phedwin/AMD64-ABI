@@ -1,9 +1,21 @@
+/*! setup*/
 
+#include <stdio.h>
+void square(int value, int *ans) {
+	value *= value;
+	*ans = value;
+}
 
-__attribute__((section(".layout"))) char buffer[1024]; /*bss*/
+#include "common.h"
 
-int main(int arg, char **argv) {
-	int k;
-	for (k = 0; k < sizeof buffer; k++)
-		buffer[k] = 'A';
+int main(int argc, char **argv, char **envp) {
+	int ans, value;
+	char *number = argv[1];
+
+	if (number) {
+		value = strtol(number, 0, 10);
+		square(value, &ans);
+	}
+	printf("%d\n", ans);
+	return 0;
 }

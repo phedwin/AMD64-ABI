@@ -1,12 +1,8 @@
 
 
-#include <bits/posix1_lim.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-
 /*! process control*/
+
+#include "common.h"
 
 char temp[] = "/tmp/fileXXXXXX";
 static char *file;
@@ -50,7 +46,7 @@ void clean_routine() {
 
 int globvar = 6;
 /* external variable in initialized data */
-char buf[_POSIX_PATH_MAX] = "a write to stdout\n";
+char buf[256] = "a write to stdout\n";
 
 void main(int argc, char **argv) {
 	int var;

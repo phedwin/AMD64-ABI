@@ -5,6 +5,9 @@
 #include <stdlib.h>
 struct Vertex4D {};
 
+// PIN
+static char *restrict ptr = 0;
+
 struct Rectangle {
 	int width, length;
 };

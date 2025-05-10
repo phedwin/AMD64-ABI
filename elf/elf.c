@@ -18,3 +18,4 @@ void read_elf(char *restrict a) {
 	read(fd, &elf, sizeof elf);
 	printf("%hu\n", elf.e_machine);
 }
+int main() {}

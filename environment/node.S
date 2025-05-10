@@ -1,11 +1,10 @@
 
-    
-fmt: .asciz "%s\n"
 
-    .text
-    .type _start, @function
-    .globl _start
-_start:
+#include "../linkage.h"
+VARIABLE(fmt):
+    .string "%s\n"
+
+FUNCTION(_start):
     /* get OS proc arguments */
     leaq 8(%rsp), %rbx /* we have argv at this point */
     xor %rcx, %rcx

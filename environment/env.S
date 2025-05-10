@@ -1,27 +1,16 @@
-    .data
-    .global format
+
+#include "../linkage.h"
 format: .asciz "%s"
 
 
-    .text
-
-    .globl _start
-_start:
-    
-    # argc
+FUNCTION(_start):    
     movq (%rsp), %rdi
-    
-
-    # argv
     leaq 8(%rsp), %rsi
 
     movq %rdi, %rdx
     shlq $3, %rdx
     addq $8, %rdx
-
-    # argv
     leaq (%rsi, %rdx), %rdx
-
     xor %rbx, %rbx
 .loop:
     leaq (%rdx, %rbx, 8), %rsi

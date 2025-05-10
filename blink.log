@@ -1,0 +1,371 @@
+I2025-05-06T09:01:03.176590:blink/syscall.c:5722:10738 missing syscall 0x14e
+I2025-05-06T09:01:03.235065:blink/syscall.c:5722:10738 missing syscall 0x07a
+I2025-05-06T09:01:03.235120:blink/syscall.c:5722:10738 missing syscall 0x07b
+I2025-05-06T09:01:03.235235:blink/syscall.c:5722:10738 missing syscall 0x07a
+I2025-05-06T09:01:03.235254:blink/syscall.c:5722:10738 missing syscall 0x07b
+I2025-05-06T09:01:03.279502:blink/syscall.c:5722:10739 missing syscall 0x14e
+I2025-05-06T09:01:03.295774:blink/syscall.c:5722:10740 missing syscall 0x14e
+I2025-05-06T09:01:03.319688:blink/syscall.c:5722:10742 missing syscall 0x14e
+I2025-05-06T09:01:03.349488:blink/syscall.c:5722:10743 missing syscall 0x14e
+I2025-05-06T09:01:03.638092:blink/syscall.c:5722:10744 missing syscall 0x14e
+I2025-05-06T09:01:03.644030:blink/loader.c:829:10744 /home/don/.local/bin/bash: can't emulate: No such file or directory
+I2025-05-06T09:01:03.644140:blink/loader.c:829:10744 /home/don/.cargo/bin/bash: can't emulate: No such file or directory
+I2025-05-06T09:01:03.644221:blink/loader.c:829:10744 /home/don/.nvm/versions/node/v22.13.1/bin/bash: can't emulate: No such file or directory
+I2025-05-06T09:01:03.644286:blink/loader.c:829:10744 /home/don/.bun/bin/bash: can't emulate: No such file or directory
+I2025-05-06T09:01:03.644358:blink/loader.c:829:10744 /home/don/.rbenv/shims/bash: can't emulate: No such file or directory
+I2025-05-06T09:01:03.644423:blink/loader.c:829:10744 /home/don/.rbenv/shims/bash: can't emulate: No such file or directory
+I2025-05-06T09:01:03.644498:blink/loader.c:829:10744 /home/don/.rbenv/bin/bash: can't emulate: No such file or directory
+I2025-05-06T09:01:03.644563:blink/loader.c:829:10744 /usr/local/sbin/bash: can't emulate: No such file or directory
+I2025-05-06T09:01:03.644620:blink/loader.c:829:10744 /usr/local/bin/bash: can't emulate: No such file or directory
+I2025-05-06T09:01:03.644674:blink/loader.c:829:10744 /usr/sbin/bash: can't emulate: No such file or directory
+I2025-05-06T09:01:03.650221:blink/syscall.c:5722:10744 missing syscall 0x14e
+I2025-05-06T09:01:03.711152:blink/syscall.c:5722:10749 missing syscall 0x14e
+I2025-05-06T09:01:03.762876:blink/syscall.c:5722:10744 missing syscall 0x14e
+I2025-05-06T09:01:03.770640:blink/loader.c:829:10744 /home/don/.rbenv/libexec/bash: can't emulate: No such file or directory
+I2025-05-06T09:01:03.770759:blink/loader.c:829:10744 /home/don/.rbenv/plugins/ruby-build/bin/bash: can't emulate: No such file or directory
+I2025-05-06T09:01:03.770818:blink/loader.c:829:10744 /home/don/.local/bin/bash: can't emulate: No such file or directory
+I2025-05-06T09:01:03.770878:blink/loader.c:829:10744 /home/don/.cargo/bin/bash: can't emulate: No such file or directory
+I2025-05-06T09:01:03.770929:blink/loader.c:829:10744 /home/don/.nvm/versions/node/v22.13.1/bin/bash: can't emulate: No such file or directory
+I2025-05-06T09:01:03.770981:blink/loader.c:829:10744 /home/don/.bun/bin/bash: can't emulate: No such file or directory
+I2025-05-06T09:01:03.771029:blink/loader.c:829:10744 /home/don/.rbenv/shims/bash: can't emulate: No such file or directory
+I2025-05-06T09:01:03.771074:blink/loader.c:829:10744 /home/don/.rbenv/shims/bash: can't emulate: No such file or directory
+I2025-05-06T09:01:03.771119:blink/loader.c:829:10744 /home/don/.rbenv/bin/bash: can't emulate: No such file or directory
+I2025-05-06T09:01:03.771165:blink/loader.c:829:10744 /usr/local/sbin/bash: can't emulate: No such file or directory
+I2025-05-06T09:01:03.771212:blink/loader.c:829:10744 /usr/local/bin/bash: can't emulate: No such file or directory
+I2025-05-06T09:01:03.771258:blink/loader.c:829:10744 /usr/sbin/bash: can't emulate: No such file or directory
+I2025-05-06T09:01:03.778036:blink/syscall.c:5722:10744 missing syscall 0x14e
+I2025-05-06T09:01:03.838696:blink/syscall.c:5722:10751 missing syscall 0x14e
+I2025-05-06T09:01:03.871889:blink/syscall.c:5722:10752 missing syscall 0x14e
+I2025-05-06T09:01:03.881239:blink/loader.c:829:10752 /home/don/.rbenv/libexec/bash: can't emulate: No such file or directory
+I2025-05-06T09:01:03.881387:blink/loader.c:829:10752 /home/don/.rbenv/plugins/ruby-build/bin/bash: can't emulate: No such file or directory
+I2025-05-06T09:01:03.881505:blink/loader.c:829:10752 /home/don/.local/bin/bash: can't emulate: No such file or directory
+I2025-05-06T09:01:03.881579:blink/loader.c:829:10752 /home/don/.cargo/bin/bash: can't emulate: No such file or directory
+I2025-05-06T09:01:03.881642:blink/loader.c:829:10752 /home/don/.nvm/versions/node/v22.13.1/bin/bash: can't emulate: No such file or directory
+I2025-05-06T09:01:03.881701:blink/loader.c:829:10752 /home/don/.bun/bin/bash: can't emulate: No such file or directory
+I2025-05-06T09:01:03.881760:blink/loader.c:829:10752 /home/don/.rbenv/shims/bash: can't emulate: No such file or directory
+I2025-05-06T09:01:03.881817:blink/loader.c:829:10752 /home/don/.rbenv/shims/bash: can't emulate: No such file or directory
+I2025-05-06T09:01:03.881871:blink/loader.c:829:10752 /home/don/.rbenv/bin/bash: can't emulate: No such file or directory
+I2025-05-06T09:01:03.881927:blink/loader.c:829:10752 /usr/local/sbin/bash: can't emulate: No such file or directory
+I2025-05-06T09:01:03.881984:blink/loader.c:829:10752 /usr/local/bin/bash: can't emulate: No such file or directory
+I2025-05-06T09:01:03.882041:blink/loader.c:829:10752 /usr/sbin/bash: can't emulate: No such file or directory
+I2025-05-06T09:01:03.891952:blink/syscall.c:5722:10752 missing syscall 0x14e
+I2025-05-06T09:01:03.954086:blink/syscall.c:5722:10754 missing syscall 0x14e
+I2025-05-06T09:01:03.959892:blink/syscall.c:5722:10755 missing syscall 0x14e
+I2025-05-06T09:01:04.028753:blink/syscall.c:3300:10744 missing fcntl() command 1032
+I2025-05-06T09:01:04.034860:blink/syscall.c:3300:10756 missing fcntl() command 1032
+I2025-05-06T09:01:04.042907:blink/syscall.c:5722:10756 missing syscall 0x14e
+I2025-05-06T09:01:04.057926:blink/syscall.c:3300:10757 missing fcntl() command 1032
+I2025-05-06T09:01:04.065906:blink/syscall.c:5722:10757 missing syscall 0x14e
+I2025-05-06T09:01:04.102685:blink/syscall.c:5722:10758 missing syscall 0x14e
+I2025-05-06T09:01:04.128002:blink/syscall.c:5722:10759 missing syscall 0x14e
+I2025-05-06T09:01:04.155901:blink/syscall.c:5722:10760 missing syscall 0x14e
+I2025-05-06T09:01:04.277286:blink/syscall.c:3300:10738 missing fcntl() command 1032
+I2025-05-06T09:01:04.309953:blink/syscall.c:5722:10763 missing syscall 0x14e
+I2025-05-06T09:01:04.355356:blink/syscall.c:5722:10767 missing syscall 0x14e
+I2025-05-06T09:01:37.496171:blink/syscall.c:5722:10983 missing syscall 0x14e
+I2025-05-06T09:01:37.550953:blink/syscall.c:5722:10983 missing syscall 0x07a
+I2025-05-06T09:01:37.551035:blink/syscall.c:5722:10983 missing syscall 0x07b
+I2025-05-06T09:01:37.551164:blink/syscall.c:5722:10983 missing syscall 0x07a
+I2025-05-06T09:01:37.551202:blink/syscall.c:5722:10983 missing syscall 0x07b
+I2025-05-06T09:01:37.591735:blink/syscall.c:5722:10985 missing syscall 0x14e
+I2025-05-06T09:01:37.607866:blink/syscall.c:5722:10986 missing syscall 0x14e
+I2025-05-06T09:01:37.631826:blink/syscall.c:5722:10988 missing syscall 0x14e
+I2025-05-06T09:01:37.660863:blink/syscall.c:5722:10989 missing syscall 0x14e
+I2025-05-06T09:01:37.940903:blink/syscall.c:5722:10990 missing syscall 0x14e
+I2025-05-06T09:01:37.947176:blink/loader.c:829:10990 /home/don/.local/bin/bash: can't emulate: No such file or directory
+I2025-05-06T09:01:37.947269:blink/loader.c:829:10990 /home/don/.cargo/bin/bash: can't emulate: No such file or directory
+I2025-05-06T09:01:37.947327:blink/loader.c:829:10990 /home/don/.nvm/versions/node/v22.13.1/bin/bash: can't emulate: No such file or directory
+I2025-05-06T09:01:37.947378:blink/loader.c:829:10990 /home/don/.bun/bin/bash: can't emulate: No such file or directory
+I2025-05-06T09:01:37.947431:blink/loader.c:829:10990 /home/don/.rbenv/shims/bash: can't emulate: No such file or directory
+I2025-05-06T09:01:37.947483:blink/loader.c:829:10990 /home/don/.rbenv/shims/bash: can't emulate: No such file or directory
+I2025-05-06T09:01:37.947525:blink/loader.c:829:10990 /home/don/.rbenv/bin/bash: can't emulate: No such file or directory
+I2025-05-06T09:01:37.947568:blink/loader.c:829:10990 /usr/local/sbin/bash: can't emulate: No such file or directory
+I2025-05-06T09:01:37.947615:blink/loader.c:829:10990 /usr/local/bin/bash: can't emulate: No such file or directory
+I2025-05-06T09:01:37.947649:blink/loader.c:829:10990 /usr/sbin/bash: can't emulate: No such file or directory
+I2025-05-06T09:01:37.953147:blink/syscall.c:5722:10990 missing syscall 0x14e
+I2025-05-06T09:01:38.017259:blink/syscall.c:5722:11000 missing syscall 0x14e
+I2025-05-06T09:01:38.061920:blink/syscall.c:5722:10990 missing syscall 0x14e
+I2025-05-06T09:01:38.068521:blink/loader.c:829:10990 /home/don/.rbenv/libexec/bash: can't emulate: No such file or directory
+I2025-05-06T09:01:38.068623:blink/loader.c:829:10990 /home/don/.rbenv/plugins/ruby-build/bin/bash: can't emulate: No such file or directory
+I2025-05-06T09:01:38.068673:blink/loader.c:829:10990 /home/don/.local/bin/bash: can't emulate: No such file or directory
+I2025-05-06T09:01:38.068716:blink/loader.c:829:10990 /home/don/.cargo/bin/bash: can't emulate: No such file or directory
+I2025-05-06T09:01:38.068759:blink/loader.c:829:10990 /home/don/.nvm/versions/node/v22.13.1/bin/bash: can't emulate: No such file or directory
+I2025-05-06T09:01:38.068800:blink/loader.c:829:10990 /home/don/.bun/bin/bash: can't emulate: No such file or directory
+I2025-05-06T09:01:38.068840:blink/loader.c:829:10990 /home/don/.rbenv/shims/bash: can't emulate: No such file or directory
+I2025-05-06T09:01:38.068878:blink/loader.c:829:10990 /home/don/.rbenv/shims/bash: can't emulate: No such file or directory
+I2025-05-06T09:01:38.068916:blink/loader.c:829:10990 /home/don/.rbenv/bin/bash: can't emulate: No such file or directory
+I2025-05-06T09:01:38.068956:blink/loader.c:829:10990 /usr/local/sbin/bash: can't emulate: No such file or directory
+I2025-05-06T09:01:38.068994:blink/loader.c:829:10990 /usr/local/bin/bash: can't emulate: No such file or directory
+I2025-05-06T09:01:38.069031:blink/loader.c:829:10990 /usr/sbin/bash: can't emulate: No such file or directory
+I2025-05-06T09:01:38.074871:blink/syscall.c:5722:10990 missing syscall 0x14e
+I2025-05-06T09:01:38.119982:blink/syscall.c:5722:11004 missing syscall 0x14e
+I2025-05-06T09:01:38.144801:blink/syscall.c:5722:11005 missing syscall 0x14e
+I2025-05-06T09:01:38.150723:blink/loader.c:829:11005 /home/don/.rbenv/libexec/bash: can't emulate: No such file or directory
+I2025-05-06T09:01:38.150820:blink/loader.c:829:11005 /home/don/.rbenv/plugins/ruby-build/bin/bash: can't emulate: No such file or directory
+I2025-05-06T09:01:38.150861:blink/loader.c:829:11005 /home/don/.local/bin/bash: can't emulate: No such file or directory
+I2025-05-06T09:01:38.150899:blink/loader.c:829:11005 /home/don/.cargo/bin/bash: can't emulate: No such file or directory
+I2025-05-06T09:01:38.150938:blink/loader.c:829:11005 /home/don/.nvm/versions/node/v22.13.1/bin/bash: can't emulate: No such file or directory
+I2025-05-06T09:01:38.150975:blink/loader.c:829:11005 /home/don/.bun/bin/bash: can't emulate: No such file or directory
+I2025-05-06T09:01:38.151011:blink/loader.c:829:11005 /home/don/.rbenv/shims/bash: can't emulate: No such file or directory
+I2025-05-06T09:01:38.151045:blink/loader.c:829:11005 /home/don/.rbenv/shims/bash: can't emulate: No such file or directory
+I2025-05-06T09:01:38.151083:blink/loader.c:829:11005 /home/don/.rbenv/bin/bash: can't emulate: No such file or directory
+I2025-05-06T09:01:38.151118:blink/loader.c:829:11005 /usr/local/sbin/bash: can't emulate: No such file or directory
+I2025-05-06T09:01:38.151152:blink/loader.c:829:11005 /usr/local/bin/bash: can't emulate: No such file or directory
+I2025-05-06T09:01:38.151187:blink/loader.c:829:11005 /usr/sbin/bash: can't emulate: No such file or directory
+I2025-05-06T09:01:38.156283:blink/syscall.c:5722:11005 missing syscall 0x14e
+I2025-05-06T09:01:38.192660:blink/syscall.c:5722:11007 missing syscall 0x14e
+I2025-05-06T09:01:38.196272:blink/syscall.c:5722:11008 missing syscall 0x14e
+I2025-05-06T09:01:38.248155:blink/syscall.c:3300:10990 missing fcntl() command 1032
+I2025-05-06T09:01:38.252847:blink/syscall.c:3300:11009 missing fcntl() command 1032
+I2025-05-06T09:01:38.259216:blink/syscall.c:5722:11009 missing syscall 0x14e
+I2025-05-06T09:01:38.271056:blink/syscall.c:3300:11010 missing fcntl() command 1032
+I2025-05-06T09:01:38.277633:blink/syscall.c:5722:11010 missing syscall 0x14e
+I2025-05-06T09:01:38.305230:blink/syscall.c:5722:11011 missing syscall 0x14e
+I2025-05-06T09:01:38.324801:blink/syscall.c:5722:11012 missing syscall 0x14e
+I2025-05-06T09:01:38.346329:blink/syscall.c:5722:11013 missing syscall 0x14e
+I2025-05-06T09:01:38.432553:blink/syscall.c:3300:10983 missing fcntl() command 1032
+I2025-05-06T09:01:38.457472:blink/syscall.c:5722:11016 missing syscall 0x14e
+I2025-05-06T09:01:38.493612:blink/syscall.c:5722:11020 missing syscall 0x14e
+I2025-05-06T09:01:57.594105:blink/blinkenlights.c:3487:11095 Tui
+I2025-05-06T09:01:57.594866:blink/blinkenlights.c:976:11095 loaded program /usr/bin/bash
+110000000000-110000000fff  4096 100% r   /lib64/ld-linux-x86-64.so.2
+110000001000-11000002dfff  180k   3% rx  /lib64/ld-linux-x86-64.so.2
+11000002e000-110000037fff   40k  10% r   /lib64/ld-linux-x86-64.so.2
+110000038000-11000003bfff   16k  25% rw  /lib64/ld-linux-x86-64.so.2
+110001000000-11000102ffff  192k   3% r   /usr/bin/bash
+110001030000-110001125fff  984k   1% rx  /usr/bin/bash
+110001126000-11000115afff  212k   2% r   /usr/bin/bash
+11000115b000-110001172fff   96k   5% rw  /usr/bin/bash
+4fffff800000-4fffffffffff 8192k   1% rw  [stack]
+I2025-05-06T09:01:57.599424:blink/blinkenlights.c:785:11095 TuiRejuvinate
+I2025-05-06T09:02:12.970608:blink/blinkenlights.c:3581:11095 TUI EXIT
+I2025-05-06T09:02:12.970726:blink/blinkenlights.c:854:11095 TuiCleanup
+I2025-05-06T09:02:12.970767:blink/blinkenlights.c:846:11095 TtyRestore
+I2025-05-06T09:02:12.983010:blink/blinkenlights.c:846:0 TtyRestore
+I2025-05-06T09:04:06.218533:blink/syscall.c:5722:11336 missing syscall 0x14e
+I2025-05-06T09:04:06.296676:blink/syscall.c:5722:11336 missing syscall 0x1b3
+I2025-05-06T09:04:06.330240:blink/syscall.c:5722:11338 missing syscall 0x14e
+I2025-05-06T09:04:06.528210:blink/syscall.c:5722:11336 missing syscall 0x1b3
+I2025-05-06T09:04:06.550523:blink/syscall.c:5722:11339 missing syscall 0x14e
+I2025-05-06T09:04:06.623651:blink/syscall.c:5722:11339 missing syscall 0x1b3
+I2025-05-06T09:04:06.650850:blink/syscall.c:5722:11340 missing syscall 0x14e
+I2025-05-06T09:04:06.705558:blink/uop.c:1626:11340 jit micro-operation at address 5d7eca166229 has branches or static memory references
+I2025-05-06T09:04:07.511468:blink/syscall.c:5722:11339 missing syscall 0x1b3
+I2025-05-06T09:04:07.513214:blink/loader.c:829:11348 /home/don/.local/bin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:07.513365:blink/loader.c:829:11348 /home/don/.cargo/bin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:07.513458:blink/loader.c:829:11348 /home/don/.nvm/versions/node/v22.13.1/bin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:07.513553:blink/loader.c:829:11348 /home/don/.bun/bin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:07.513637:blink/loader.c:829:11348 /home/don/.rbenv/shims/as: can't emulate: No such file or directory
+I2025-05-06T09:04:07.513705:blink/loader.c:829:11348 /home/don/.rbenv/shims/as: can't emulate: No such file or directory
+I2025-05-06T09:04:07.513773:blink/loader.c:829:11348 /home/don/.rbenv/bin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:07.513841:blink/loader.c:829:11348 /usr/local/sbin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:07.513906:blink/loader.c:829:11348 /usr/local/bin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:07.513989:blink/loader.c:829:11348 /usr/sbin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:07.524203:blink/syscall.c:5722:11348 missing syscall 0x14e
+I2025-05-06T09:04:07.598334:blink/syscall.c:5722:11339 missing syscall 0x1b3
+I2025-05-06T09:04:07.618868:blink/syscall.c:5722:11349 missing syscall 0x14e
+I2025-05-06T09:04:07.656287:blink/syscall.c:5722:11349 missing syscall 0x1b3
+I2025-05-06T09:04:07.681515:blink/syscall.c:5722:11350 missing syscall 0x14e
+I2025-05-06T09:04:07.756001:blink/uop.c:1626:11350 jit micro-operation at address 5d7eca166229 has branches or static memory references
+I2025-05-06T09:04:07.992722:blink/syscall.c:5722:11336 missing syscall 0x1b3
+I2025-05-06T09:04:08.000751:blink/syscall.c:5722:11351 missing syscall 0x14e
+I2025-05-06T09:04:08.023961:blink/syscall.c:5722:11351 missing syscall 0x1b3
+I2025-05-06T09:04:08.032722:blink/syscall.c:5722:11352 missing syscall 0x14e
+I2025-05-06T09:04:08.072680:blink/uop.c:1626:11352 jit micro-operation at address 5d7eca166229 has branches or static memory references
+I2025-05-06T09:04:08.580736:blink/syscall.c:5722:11351 missing syscall 0x1b3
+I2025-05-06T09:04:08.582263:blink/loader.c:829:11353 /home/don/.local/bin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:08.582389:blink/loader.c:829:11353 /home/don/.cargo/bin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:08.582462:blink/loader.c:829:11353 /home/don/.nvm/versions/node/v22.13.1/bin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:08.582552:blink/loader.c:829:11353 /home/don/.bun/bin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:08.582598:blink/loader.c:829:11353 /home/don/.rbenv/shims/as: can't emulate: No such file or directory
+I2025-05-06T09:04:08.582636:blink/loader.c:829:11353 /home/don/.rbenv/shims/as: can't emulate: No such file or directory
+I2025-05-06T09:04:08.582673:blink/loader.c:829:11353 /home/don/.rbenv/bin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:08.582710:blink/loader.c:829:11353 /usr/local/sbin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:08.582746:blink/loader.c:829:11353 /usr/local/bin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:08.582781:blink/loader.c:829:11353 /usr/sbin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:08.589504:blink/syscall.c:5722:11353 missing syscall 0x14e
+I2025-05-06T09:04:08.637829:blink/syscall.c:5722:11351 missing syscall 0x1b3
+I2025-05-06T09:04:08.644721:blink/syscall.c:5722:11354 missing syscall 0x14e
+I2025-05-06T09:04:08.657471:blink/syscall.c:5722:11354 missing syscall 0x1b3
+I2025-05-06T09:04:08.665561:blink/syscall.c:5722:11355 missing syscall 0x14e
+I2025-05-06T09:04:08.691117:blink/uop.c:1626:11355 jit micro-operation at address 5d7eca166229 has branches or static memory references
+I2025-05-06T09:04:08.874362:blink/syscall.c:5722:11336 missing syscall 0x1b3
+I2025-05-06T09:04:08.881670:blink/syscall.c:5722:11356 missing syscall 0x14e
+I2025-05-06T09:04:08.902806:blink/syscall.c:5722:11356 missing syscall 0x1b3
+I2025-05-06T09:04:08.911203:blink/syscall.c:5722:11357 missing syscall 0x14e
+I2025-05-06T09:04:08.949874:blink/uop.c:1626:11357 jit micro-operation at address 5d7eca166229 has branches or static memory references
+I2025-05-06T09:04:09.479363:blink/syscall.c:5722:11356 missing syscall 0x1b3
+I2025-05-06T09:04:09.480882:blink/loader.c:829:11358 /home/don/.local/bin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:09.481020:blink/loader.c:829:11358 /home/don/.cargo/bin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:09.481083:blink/loader.c:829:11358 /home/don/.nvm/versions/node/v22.13.1/bin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:09.481132:blink/loader.c:829:11358 /home/don/.bun/bin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:09.481179:blink/loader.c:829:11358 /home/don/.rbenv/shims/as: can't emulate: No such file or directory
+I2025-05-06T09:04:09.481218:blink/loader.c:829:11358 /home/don/.rbenv/shims/as: can't emulate: No such file or directory
+I2025-05-06T09:04:09.481256:blink/loader.c:829:11358 /home/don/.rbenv/bin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:09.481293:blink/loader.c:829:11358 /usr/local/sbin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:09.481327:blink/loader.c:829:11358 /usr/local/bin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:09.481362:blink/loader.c:829:11358 /usr/sbin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:09.487820:blink/syscall.c:5722:11358 missing syscall 0x14e
+I2025-05-06T09:04:09.532440:blink/syscall.c:5722:11356 missing syscall 0x1b3
+I2025-05-06T09:04:09.539046:blink/syscall.c:5722:11359 missing syscall 0x14e
+I2025-05-06T09:04:09.551312:blink/syscall.c:5722:11359 missing syscall 0x1b3
+I2025-05-06T09:04:09.558982:blink/syscall.c:5722:11360 missing syscall 0x14e
+I2025-05-06T09:04:09.582534:blink/uop.c:1626:11360 jit micro-operation at address 5d7eca166229 has branches or static memory references
+I2025-05-06T09:04:09.773439:blink/syscall.c:5722:11336 missing syscall 0x1b3
+I2025-05-06T09:04:09.780349:blink/syscall.c:5722:11361 missing syscall 0x14e
+I2025-05-06T09:04:09.801533:blink/syscall.c:5722:11361 missing syscall 0x1b3
+I2025-05-06T09:04:09.809605:blink/syscall.c:5722:11362 missing syscall 0x14e
+I2025-05-06T09:04:09.847920:blink/uop.c:1626:11362 jit micro-operation at address 5d7eca166229 has branches or static memory references
+I2025-05-06T09:04:10.273665:blink/syscall.c:5722:11361 missing syscall 0x1b3
+I2025-05-06T09:04:10.275141:blink/loader.c:829:11363 /home/don/.local/bin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:10.275268:blink/loader.c:829:11363 /home/don/.cargo/bin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:10.275330:blink/loader.c:829:11363 /home/don/.nvm/versions/node/v22.13.1/bin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:10.275380:blink/loader.c:829:11363 /home/don/.bun/bin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:10.275416:blink/loader.c:829:11363 /home/don/.rbenv/shims/as: can't emulate: No such file or directory
+I2025-05-06T09:04:10.275461:blink/loader.c:829:11363 /home/don/.rbenv/shims/as: can't emulate: No such file or directory
+I2025-05-06T09:04:10.275522:blink/loader.c:829:11363 /home/don/.rbenv/bin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:10.275561:blink/loader.c:829:11363 /usr/local/sbin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:10.275593:blink/loader.c:829:11363 /usr/local/bin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:10.275624:blink/loader.c:829:11363 /usr/sbin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:10.281839:blink/syscall.c:5722:11363 missing syscall 0x14e
+I2025-05-06T09:04:10.325960:blink/syscall.c:5722:11361 missing syscall 0x1b3
+I2025-05-06T09:04:10.332593:blink/syscall.c:5722:11364 missing syscall 0x14e
+I2025-05-06T09:04:10.344583:blink/syscall.c:5722:11364 missing syscall 0x1b3
+I2025-05-06T09:04:10.351921:blink/syscall.c:5722:11365 missing syscall 0x14e
+I2025-05-06T09:04:10.374345:blink/uop.c:1626:11365 jit micro-operation at address 5d7eca166229 has branches or static memory references
+I2025-05-06T09:04:10.558334:blink/syscall.c:5722:11336 missing syscall 0x1b3
+I2025-05-06T09:04:10.565051:blink/syscall.c:5722:11366 missing syscall 0x14e
+I2025-05-06T09:04:10.585126:blink/syscall.c:5722:11366 missing syscall 0x1b3
+I2025-05-06T09:04:10.593051:blink/syscall.c:5722:11367 missing syscall 0x14e
+I2025-05-06T09:04:10.630596:blink/uop.c:1626:11367 jit micro-operation at address 5d7eca166229 has branches or static memory references
+I2025-05-06T09:04:11.172787:blink/syscall.c:5722:11366 missing syscall 0x1b3
+I2025-05-06T09:04:11.174239:blink/loader.c:829:11368 /home/don/.local/bin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:11.174385:blink/loader.c:829:11368 /home/don/.cargo/bin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:11.174495:blink/loader.c:829:11368 /home/don/.nvm/versions/node/v22.13.1/bin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:11.174572:blink/loader.c:829:11368 /home/don/.bun/bin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:11.174631:blink/loader.c:829:11368 /home/don/.rbenv/shims/as: can't emulate: No such file or directory
+I2025-05-06T09:04:11.174687:blink/loader.c:829:11368 /home/don/.rbenv/shims/as: can't emulate: No such file or directory
+I2025-05-06T09:04:11.174746:blink/loader.c:829:11368 /home/don/.rbenv/bin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:11.174818:blink/loader.c:829:11368 /usr/local/sbin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:11.174878:blink/loader.c:829:11368 /usr/local/bin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:11.174937:blink/loader.c:829:11368 /usr/sbin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:11.181794:blink/syscall.c:5722:11368 missing syscall 0x14e
+I2025-05-06T09:04:11.227534:blink/syscall.c:5722:11366 missing syscall 0x1b3
+I2025-05-06T09:04:11.233887:blink/syscall.c:5722:11369 missing syscall 0x14e
+I2025-05-06T09:04:11.245717:blink/syscall.c:5722:11369 missing syscall 0x1b3
+I2025-05-06T09:04:11.253075:blink/syscall.c:5722:11370 missing syscall 0x14e
+I2025-05-06T09:04:11.275493:blink/uop.c:1626:11370 jit micro-operation at address 5d7eca166229 has branches or static memory references
+I2025-05-06T09:04:11.447368:blink/syscall.c:5722:11336 missing syscall 0x1b3
+I2025-05-06T09:04:11.453981:blink/syscall.c:5722:11371 missing syscall 0x14e
+I2025-05-06T09:04:11.473927:blink/syscall.c:5722:11371 missing syscall 0x1b3
+I2025-05-06T09:04:11.481578:blink/syscall.c:5722:11372 missing syscall 0x14e
+I2025-05-06T09:04:11.516947:blink/uop.c:1626:11372 jit micro-operation at address 5d7eca166229 has branches or static memory references
+I2025-05-06T09:04:12.090001:blink/syscall.c:5722:11371 missing syscall 0x1b3
+I2025-05-06T09:04:12.091549:blink/loader.c:829:11373 /home/don/.local/bin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:12.091675:blink/loader.c:829:11373 /home/don/.cargo/bin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:12.091743:blink/loader.c:829:11373 /home/don/.nvm/versions/node/v22.13.1/bin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:12.091790:blink/loader.c:829:11373 /home/don/.bun/bin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:12.091828:blink/loader.c:829:11373 /home/don/.rbenv/shims/as: can't emulate: No such file or directory
+I2025-05-06T09:04:12.091872:blink/loader.c:829:11373 /home/don/.rbenv/shims/as: can't emulate: No such file or directory
+I2025-05-06T09:04:12.091908:blink/loader.c:829:11373 /home/don/.rbenv/bin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:12.091943:blink/loader.c:829:11373 /usr/local/sbin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:12.091977:blink/loader.c:829:11373 /usr/local/bin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:12.092011:blink/loader.c:829:11373 /usr/sbin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:12.098270:blink/syscall.c:5722:11373 missing syscall 0x14e
+I2025-05-06T09:04:12.143188:blink/syscall.c:5722:11371 missing syscall 0x1b3
+I2025-05-06T09:04:12.149565:blink/syscall.c:5722:11374 missing syscall 0x14e
+I2025-05-06T09:04:12.161381:blink/syscall.c:5722:11374 missing syscall 0x1b3
+I2025-05-06T09:04:12.168797:blink/syscall.c:5722:11375 missing syscall 0x14e
+I2025-05-06T09:04:12.191737:blink/uop.c:1626:11375 jit micro-operation at address 5d7eca166229 has branches or static memory references
+I2025-05-06T09:04:12.374569:blink/syscall.c:5722:11336 missing syscall 0x1b3
+I2025-05-06T09:04:12.381325:blink/syscall.c:5722:11376 missing syscall 0x14e
+I2025-05-06T09:04:12.401321:blink/syscall.c:5722:11376 missing syscall 0x1b3
+I2025-05-06T09:04:12.409014:blink/syscall.c:5722:11377 missing syscall 0x14e
+I2025-05-06T09:04:12.445538:blink/uop.c:1626:11377 jit micro-operation at address 5d7eca166229 has branches or static memory references
+I2025-05-06T09:04:12.994753:blink/syscall.c:5722:11376 missing syscall 0x1b3
+I2025-05-06T09:04:12.996173:blink/loader.c:829:11378 /home/don/.local/bin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:12.996311:blink/loader.c:829:11378 /home/don/.cargo/bin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:12.996379:blink/loader.c:829:11378 /home/don/.nvm/versions/node/v22.13.1/bin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:12.996427:blink/loader.c:829:11378 /home/don/.bun/bin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:12.996491:blink/loader.c:829:11378 /home/don/.rbenv/shims/as: can't emulate: No such file or directory
+I2025-05-06T09:04:12.996542:blink/loader.c:829:11378 /home/don/.rbenv/shims/as: can't emulate: No such file or directory
+I2025-05-06T09:04:12.996579:blink/loader.c:829:11378 /home/don/.rbenv/bin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:12.996629:blink/loader.c:829:11378 /usr/local/sbin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:12.996674:blink/loader.c:829:11378 /usr/local/bin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:12.996709:blink/loader.c:829:11378 /usr/sbin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:13.002876:blink/syscall.c:5722:11378 missing syscall 0x14e
+I2025-05-06T09:04:13.047918:blink/syscall.c:5722:11376 missing syscall 0x1b3
+I2025-05-06T09:04:13.054304:blink/syscall.c:5722:11379 missing syscall 0x14e
+I2025-05-06T09:04:13.066154:blink/syscall.c:5722:11379 missing syscall 0x1b3
+I2025-05-06T09:04:13.073519:blink/syscall.c:5722:11380 missing syscall 0x14e
+I2025-05-06T09:04:13.095968:blink/uop.c:1626:11380 jit micro-operation at address 5d7eca166229 has branches or static memory references
+I2025-05-06T09:04:13.270521:blink/syscall.c:5722:11336 missing syscall 0x1b3
+I2025-05-06T09:04:13.277143:blink/syscall.c:5722:11381 missing syscall 0x14e
+I2025-05-06T09:04:13.296721:blink/syscall.c:5722:11381 missing syscall 0x1b3
+I2025-05-06T09:04:13.304455:blink/syscall.c:5722:11382 missing syscall 0x14e
+I2025-05-06T09:04:13.340733:blink/uop.c:1626:11382 jit micro-operation at address 5d7eca166229 has branches or static memory references
+I2025-05-06T09:04:13.925632:blink/syscall.c:5722:11381 missing syscall 0x1b3
+I2025-05-06T09:04:13.927076:blink/loader.c:829:11383 /home/don/.local/bin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:13.927211:blink/loader.c:829:11383 /home/don/.cargo/bin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:13.927273:blink/loader.c:829:11383 /home/don/.nvm/versions/node/v22.13.1/bin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:13.927319:blink/loader.c:829:11383 /home/don/.bun/bin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:13.927361:blink/loader.c:829:11383 /home/don/.rbenv/shims/as: can't emulate: No such file or directory
+I2025-05-06T09:04:13.927396:blink/loader.c:829:11383 /home/don/.rbenv/shims/as: can't emulate: No such file or directory
+I2025-05-06T09:04:13.927431:blink/loader.c:829:11383 /home/don/.rbenv/bin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:13.927465:blink/loader.c:829:11383 /usr/local/sbin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:13.927516:blink/loader.c:829:11383 /usr/local/bin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:13.927553:blink/loader.c:829:11383 /usr/sbin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:13.933993:blink/syscall.c:5722:11383 missing syscall 0x14e
+I2025-05-06T09:04:13.980889:blink/syscall.c:5722:11381 missing syscall 0x1b3
+I2025-05-06T09:04:13.987273:blink/syscall.c:5722:11384 missing syscall 0x14e
+I2025-05-06T09:04:13.998971:blink/syscall.c:5722:11384 missing syscall 0x1b3
+I2025-05-06T09:04:14.006414:blink/syscall.c:5722:11385 missing syscall 0x14e
+I2025-05-06T09:04:14.029010:blink/uop.c:1626:11385 jit micro-operation at address 5d7eca166229 has branches or static memory references
+I2025-05-06T09:04:14.211523:blink/syscall.c:5722:11336 missing syscall 0x1b3
+I2025-05-06T09:04:14.218189:blink/syscall.c:5722:11386 missing syscall 0x14e
+I2025-05-06T09:04:14.238501:blink/syscall.c:5722:11386 missing syscall 0x1b3
+I2025-05-06T09:04:14.246519:blink/syscall.c:5722:11387 missing syscall 0x14e
+I2025-05-06T09:04:14.283300:blink/uop.c:1626:11387 jit micro-operation at address 5d7eca166229 has branches or static memory references
+I2025-05-06T09:04:14.806702:blink/syscall.c:5722:11386 missing syscall 0x1b3
+I2025-05-06T09:04:14.808111:blink/loader.c:829:11388 /home/don/.local/bin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:14.808246:blink/loader.c:829:11388 /home/don/.cargo/bin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:14.808303:blink/loader.c:829:11388 /home/don/.nvm/versions/node/v22.13.1/bin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:14.808352:blink/loader.c:829:11388 /home/don/.bun/bin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:14.808399:blink/loader.c:829:11388 /home/don/.rbenv/shims/as: can't emulate: No such file or directory
+I2025-05-06T09:04:14.808435:blink/loader.c:829:11388 /home/don/.rbenv/shims/as: can't emulate: No such file or directory
+I2025-05-06T09:04:14.808470:blink/loader.c:829:11388 /home/don/.rbenv/bin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:14.808520:blink/loader.c:829:11388 /usr/local/sbin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:14.808556:blink/loader.c:829:11388 /usr/local/bin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:14.808589:blink/loader.c:829:11388 /usr/sbin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:14.814780:blink/syscall.c:5722:11388 missing syscall 0x14e
+I2025-05-06T09:04:14.858081:blink/syscall.c:5722:11386 missing syscall 0x1b3
+I2025-05-06T09:04:14.864264:blink/syscall.c:5722:11389 missing syscall 0x14e
+I2025-05-06T09:04:14.875795:blink/syscall.c:5722:11389 missing syscall 0x1b3
+I2025-05-06T09:04:14.883126:blink/syscall.c:5722:11390 missing syscall 0x14e
+I2025-05-06T09:04:14.905876:blink/uop.c:1626:11390 jit micro-operation at address 5d7eca166229 has branches or static memory references
+I2025-05-06T09:04:15.077428:blink/syscall.c:5722:11336 missing syscall 0x1b3
+I2025-05-06T09:04:15.084047:blink/syscall.c:5722:11391 missing syscall 0x14e
+I2025-05-06T09:04:15.103553:blink/syscall.c:5722:11391 missing syscall 0x1b3
+I2025-05-06T09:04:15.111232:blink/syscall.c:5722:11392 missing syscall 0x14e
+I2025-05-06T09:04:15.146987:blink/uop.c:1626:11392 jit micro-operation at address 5d7eca166229 has branches or static memory references
+I2025-05-06T09:04:15.733904:blink/syscall.c:5722:11391 missing syscall 0x1b3
+I2025-05-06T09:04:15.735306:blink/loader.c:829:11393 /home/don/.local/bin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:15.735449:blink/loader.c:829:11393 /home/don/.cargo/bin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:15.735540:blink/loader.c:829:11393 /home/don/.nvm/versions/node/v22.13.1/bin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:15.735606:blink/loader.c:829:11393 /home/don/.bun/bin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:15.735668:blink/loader.c:829:11393 /home/don/.rbenv/shims/as: can't emulate: No such file or directory
+I2025-05-06T09:04:15.735722:blink/loader.c:829:11393 /home/don/.rbenv/shims/as: can't emulate: No such file or directory
+I2025-05-06T09:04:15.735775:blink/loader.c:829:11393 /home/don/.rbenv/bin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:15.735835:blink/loader.c:829:11393 /usr/local/sbin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:15.735891:blink/loader.c:829:11393 /usr/local/bin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:15.735946:blink/loader.c:829:11393 /usr/sbin/as: can't emulate: No such file or directory
+I2025-05-06T09:04:15.742712:blink/syscall.c:5722:11393 missing syscall 0x14e
+I2025-05-06T09:04:15.790186:blink/syscall.c:5722:11391 missing syscall 0x1b3
+I2025-05-06T09:04:15.796485:blink/syscall.c:5722:11394 missing syscall 0x14e
+I2025-05-06T09:04:15.808115:blink/syscall.c:5722:11394 missing syscall 0x1b3
+I2025-05-06T09:04:15.815863:blink/syscall.c:5722:11395 missing syscall 0x14e
+I2025-05-06T09:04:15.839201:blink/uop.c:1626:11395 jit micro-operation at address 5d7eca166229 has branches or static memory references
+I2025-05-06T09:04:16.026872:blink/syscall.c:5722:11336 missing syscall 0x1b3
+I2025-05-06T09:04:16.033488:blink/syscall.c:5722:11396 missing syscall 0x14e
+I2025-05-06T09:04:16.053118:blink/syscall.c:5722:11396 missing syscall 0x1b3
+I2025-05-06T09:04:16.060739:blink/syscall.c:5722:11397 missing syscall 0x14e

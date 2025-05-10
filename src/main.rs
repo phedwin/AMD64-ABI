@@ -1,29 +1,41 @@
-use rustx86::{Animal, Cat, Dog};
-
-#[tokio::main]
-pub async fn init() {
-    let cat = Cat;
-    let dog = Dog;
-
-    let cat_says = cat.speak().await;
-    let dog_says = dog.speak().await;
-
-    println!("The cat says: {}", cat_says);
-    println!("The dog says: {}", dog_says);
+pub trait Maths {
+    type Output;
+    fn area(&self) -> Self::Output;
+    fn perimeter(&self) -> Self::Output;
+}
+pub struct Rectangle {
+    w: u32,
+    h: u32,
 }
 
-fn return_read_value() -> Result<u32, std::num::ParseIntError> {
-    let buf = &mut String::new();
+pub fn area(c: Rectangle) -> u32 {
+    c.h * c.w
+}
 
-    std::io::stdin().read_line(buf).unwrap();
+impl Maths for Rectangle {
+    type Output = u32;
 
-    let value = buf.trim().parse::<u32>();
+    fn area(&self) -> Self::Output {
+        self.h * self.w
+    }
 
-    value
+    fn perimeter(&self) -> Self::Output {
+        self.h * self.w
+    }
+}
+pub fn read<'am, P: AsRef<std::path::Path>>(path: P) -> std::io::Result<Vec<u8>> {
+    pub fn inner(path: &std::path::Path) -> std::io::Result<Vec<u8>> {
+        let mut file = std::fs::File::open(path)?;
+        let mut bytes = Vec::new();
+        std::io::Read::read_to_end(&mut file, &mut bytes)?;
+        Ok(bytes)
+    }
+    inner(path.as_ref())
 }
 
 fn main() {
-    let value = return_read_value();
-    // let value: usize = buf.trim().parse::<usize>().unwrap();
-    println!("{:?}", value);
+    let path: &str = "me.rs";
+    _ = read(path).unwrap();
+    let values = Rectangle { h: 10, w: 80 };
+    println!("value a = {} value b = {}", values.area(), area(values));
 }

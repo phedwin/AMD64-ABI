@@ -2,7 +2,6 @@
 #define ASM_LINKAGE
 
 #define VARIABLE(variable) \
-	.data;             \
 	.global variable;  \
 	variable
 

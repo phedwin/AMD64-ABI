@@ -1,6 +1,6 @@
 
 #include "../linkage.h"
-
+    .section ".text64", "ax"
 FUNCTION(add_value):
     push %rbp            #` Save old %rbp
     mov %rsp, %rbp       #` Set up new frame pointer

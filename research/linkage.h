@@ -13,4 +13,6 @@
 	.globl func;           \
 	func
 
+#include <stdio.h>
+
 #endif /*! ASM_LINKAGE*/

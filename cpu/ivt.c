@@ -9,4 +9,7 @@
 // software (e.g. MS-DOS programs). However, note that the code must remain in
 // the first MiB of RAM.
 
-
+#include <stdio.h>
+int main(void) {
+	printf("const char *, ...");
+}

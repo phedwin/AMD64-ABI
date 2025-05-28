@@ -1,4 +1,11 @@
 
+default:
+	@as -o boot.o video.S
+	@ld -Ttext 0x7C00 --oformat binary -o boot.bin boot.o
+	@qemu-system-x86_64 -drive format=raw,file=boot.bin
+
+
+
 CFLAGS = -Iresearch
 ASMFLAGS = -nostartfiles -lc -no-pie
 ifeq ($(OS),Windows_NT)

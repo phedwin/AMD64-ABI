@@ -1,20 +1,33 @@
+
+
+char *strings[3] = { "hello", "world", "foo" };
+
 #include <stdint.h>  // For uint64_t
 #include <stdio.h>
 
+void __print_string_mem() {
+	for (int k /*rcx*/ = 0; strings[k]; k++)
+		printf("%p\n", strings[k]);
+	/*is it 8 bytes or does it depend on the strlen*/
+}
+
+int main(void) {
+	__print_string_mem();
+}
 // Let's assume a mythical TLS variable 'my_thread_data_offset' exists at FS +
 // 0x10 In a real scenario, this offset would be determined by the linker for
 // __thread variables.
 #define MY_TLS_OFFSET 0x10
 
 // This will likely panic if FS base is not set up correctly for userland
-// as it's not a standard way to access TLS from userland C without __thread.
-// This is for demonstration of the ASM syntax only.
+// as it's not a standard way to access TLS from userland C without
+// __thread. This is for demonstration of the ASM syntax only.
 
 // This is the proper way to define TLS in C
 
 __thread int my_thread_specific_int = 123;
 
-int main() {
+int gs_fs_reg() {
 	int value_from_fs;
 	int direct_tls_value;
 

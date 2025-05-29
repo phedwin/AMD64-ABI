@@ -1,6 +1,6 @@
 # Makefile for bootloader
 ASM=as --32
-LD=ld -m elf_i386 -Ttext 0x7C00 --oformat binary
+LD=ld -m elf_i386 -Ttext 0x7c00 --oformat binary
 QEMU=qemu-system-i386
 
 SRC=boot.S

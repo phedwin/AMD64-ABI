@@ -16,9 +16,9 @@
 # hang:
 #     hlt
 #     jmp hang
-
+      xor %cx, %cx
 # print:
-#     lodsb
+#     rep; lodsb  ds:si -> %al rep ; c 
 #     or %al, %al
 #     jz .done
 #     mov $0x0E, %ah          

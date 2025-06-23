@@ -1,39 +1,50 @@
-
 #include "header.hxx"
+
     .bss
 .lcomm buffer, 1024
 
     .text
     .globl __cat
     .type __cat, %function
-__cat:
-LOCAL(__open_file):
+LOCAL(__cat):
     testq %rdi, %rdi
-    jz __end
+    jz .Lend               /* if path == NULL, end */
+
+    /* open(path, O_RDONLY) */
     mov $SYS_OPEN, %rax
     mov $O_RDONLY, %rsi
     syscall
-    /* handle error - not really just return */
+    /* check error */
     testb %al, %al
-    jz __end
-    mov %rax, %rdi
-    mov $SYS_READ, %rax
+    js .Lend               /* if ret < 0 (error), end */
+    mov %rax, %r12         /* save fd */
 
-    /** FIXME REDUCE ALL THESE TO MACROS **/
-LOCAL(__while):
+LOCAL(.Lread_loop):
+    movq $SYS_READ, %rax
+    movq %r12, %rdi         /* fd */
     leaq buffer(%rip), %rsi
-    mov $1024, %rdx
+    movq $1024, %rdx
     syscall
-LOCAL(__write_to_standard_out):
+    testq %rax, %rax
+    js .Lclose             /* read error -> close */
+    jz .Lclose             /* read returned 0 -> EOF -> close */
+
+    /* save read bytes  */
+    movq %rax, %rcx
+
     mov $SYS_WRITE, %rax
     mov $STDOUT_FILENO, %rdi
     leaq buffer(%rip), %rsi
-    mov $1024, %rdx
+    /* %rdx = number of bytes read (was returned in %rax & saved in %rcx) */
+    mov %rcx, %rdx /* write(fd, buf, sizeof buf); */
+
+    syscall
+    jmp .Lread_loop
+
+LOCAL(.Lclose):
+    mov $SYS_CLOSE, %rax
+    mov %r12, %rdi
     syscall
 
-LOCAL(__close_file):
-    mov $3, %rax
-    mov $SYS_CLOSE, %rdi
-    syscall
-LOCAL(__end):
+LOCAL(.Lend):
     ret

@@ -8,9 +8,9 @@ typedef char ALIGN[16];
 
 union header {
 	struct {
-		size_t size;
-		unsigned is_free;
 		union header *next;
+		size_t size;
+		_Bool is_free;
 	} s;
 	/* force the header to be aligned to 16 bytes */
 	ALIGN stub;

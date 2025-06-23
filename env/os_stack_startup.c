@@ -1,3 +1,5 @@
+#include <stdio.h>
+#include <string.h>
 #include "env.h"
 
 extern char **environ;

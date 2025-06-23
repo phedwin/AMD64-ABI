@@ -1,8 +1,10 @@
-
+#include <string.h>
+#include "stdlib.h"
 
 // the stack setup
 
-#include "common.h"
+#include <stdbool.h>
+#include "stdio.h"
 
 // this goes into void (*init)(void);
 __attribute__((constructor)) void environment(char **envp) {
@@ -27,12 +29,9 @@ int __libc_start_main(int (*main)(int, char **, char **),
 
 extern char **environ;
 
-#include <string.h>
-
 // OK so this is whats going on when we set env,  its easy to reset and env but
 // lowkey hard to set a new environment considering it now needs to be on heap
 
-#include "stdlib.h"
 int setenv_(char *name, char *value, int rewrite) {
 	bool status = false;
 	size_t size;

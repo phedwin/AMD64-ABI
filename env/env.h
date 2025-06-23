@@ -1,7 +1,7 @@
 #ifndef ENV_H
 #define ENV_H
 
-#include "common.h"
+#include <stdbool.h>
 
 extern int setenv_(char *name, char *value, int rewrite);
 

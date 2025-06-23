@@ -3,8 +3,7 @@ fmt: .asciz "%s\n"  # Format string for printf: print a string followed by a new
 
     .text
     .global _start
-    .type _start, @function
-    
+    .type _start, %function
 _start:
     mov %rsp, %rbp                   # Save the original stack pointer (%rsp) into the base pointer (%rbp).
                                      # This is a common practice for accessing function arguments.

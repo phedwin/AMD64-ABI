@@ -1,6 +1,6 @@
 	.file	"inline.c"
 	.text
-	.globl	add_values
+	.globl	   
 	.type	add_values, @function
 add_values:
 .LFB0:

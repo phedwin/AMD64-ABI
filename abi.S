@@ -121,3 +121,159 @@
 //  in the inverse order that they were pushed.
 //      5. Next, we deallocate local variables. The easiest way to do this is to 
 //  add to RSP the same amount that was subtracted from it in step 1.
+
+
+
+.section .text
+.globl cmp
+cmp:
+    # int cmp(const void *a, const void *b)
+    # Arguments:
+    #   %rdi: const void *a
+    #   %rsi: const void *b
+
+    movl (%rdi), %eax   # Move the integer pointed to by a into %eax
+    movl (%rsi), %ecx   # Move the integer pointed to by b into %ecx
+    subl %ecx, %eax     # Subtract b from a (%eax = a - b)
+    ret                 # Return the result in %eax
+
+.globl findMedianSortedArrays
+findMedianSortedArrays:
+    # double findMedianSortedArrays(int *nums1, int nums1Size, int *nums2, int nums2Size)
+    # Arguments:
+    #   %rdi: int *nums1
+    #   %rsi: int nums1Size
+    #   %rdx: int *nums2
+    #   %rcx: int nums2Size
+
+    # Prologue
+    pushq   %rbp
+    movq    %rsp, %rbp
+    subq    $64, %rsp    # Allocate space for local variables and array on stack.
+                         # This should be enough for a small T. For larger T,
+                         # consider dynamic allocation with malloc.
+
+    # Register assignments for clarity:
+    # %r10: nums1Size (from %rsi)
+    # %r11: nums2Size (from %rcx)
+    # %r12: T (total size)
+    # %r13: array base address (local stack variable)
+
+    movl    %esi, %r10d  # nums1Size
+    movl    %ecx, %r11d  # nums2Size
+
+    # Calculate T = nums1Size + nums2Size
+    addl    %r10d, %r11d # %r11d now holds T (total size)
+    movq    %r11, %r12   # Copy T to %r12 for 64-bit operations if needed
+
+    # Local array 'array' on the stack
+    # Assuming 'array' starts at %rbp - 64 (adjust as needed based on other locals)
+    leaq    -64(%rbp), %r13 # Load effective address of array start
+
+    # Merge nums1 into array
+    xorl    %eax, %eax  # i = 0
+    jmp     .L_merge_nums1_cond
+.L_merge_nums1_loop:
+    movl    (%rdi, %rax, 4), %edx # Load nums1[i]
+    movl    %edx, (%r13, %rax, 4) # Store nums1[i] into array[i]
+    incl    %eax                # i++
+.L_merge_nums1_cond:
+    cmpl    %r10d, %eax         # Compare i with nums1Size
+    jl      .L_merge_nums1_loop
+
+    # Merge nums2 into array
+    xorl    %eax, %eax          # i = 0 for nums2
+    movq    %r10, %r8           # %r8 holds the offset for array (nums1Size)
+    jmp     .L_merge_nums2_cond
+.L_merge_nums2_loop:
+    movl    (%rdx, %rax, 4), %ecx # Load nums2[i]
+    movl    %ecx, (%r13, %r8, 4) # Store nums2[i] into array[nums1Size + i]
+    incl    %eax                # i++
+    incq    %r8                 # Increment offset for array
+.L_merge_nums2_cond:
+    cmpl    %r11d, %eax         # Compare i with nums2Size (This should be i with original %r11d (nums2Size))
+                                # Fix: This loop's condition should be compared with the original nums2Size (%rcx)
+                                #      or use a separate counter for array index.
+                                # Corrected logic below for nums2 merge.
+
+    # Corrected nums2 merge:
+    # The array index for nums2 should be `nums1Size + i`.
+    # Let's re-do the merge for nums2:
+    movl    %esi, %eax          # %eax = nums1Size (starting index for nums2 elements in 'array')
+    xorl    %edx, %edx          # %edx = 0 (loop counter for nums2)
+    jmp     .L_merge_nums2_cond_fixed
+.L_merge_nums2_loop_fixed:
+    movl    (%rcx, %edx, 4), %r9d # Load nums2[edx] (using %rcx for original nums2 pointer)
+    movl    %r9d, (%r13, %rax, 4) # Store nums2[edx] into array[eax]
+    incl    %eax                # Increment array index
+    incl    %edx                # Increment nums2 counter
+.L_merge_nums2_cond_fixed:
+    cmpl    %r10d, %edx         # Compare nums2 counter with nums2Size (original %rcx)
+    jl      .L_merge_nums2_loop_fixed
+
+    # Call qsort
+    # qsort(&array, T, sizeof(int), cmp);
+    # Arguments for qsort:
+    # %rdi: base address of array
+    # %rsi: number of elements (T)
+    # %rdx: size of each element (sizeof(int) = 4)
+    # %rcx: pointer to comparison function (cmp)
+    movq    %r13, %rdi           # &array
+    movq    %r12, %rsi           # T
+    movl    $4, %edx             # sizeof(int)
+    leaq    cmp(%rip), %rcx      # Address of cmp function
+    call    qsort
+
+    # Check if T is odd or even
+    # if (T % 2 != 0)
+    movq    %r12, %rax           # T
+    movq    %rax, %rdx           # Copy T to %rdx for division
+    shrq    $63, %rdx            # Sign extend to get 0 or 1 for division
+    andq    $1, %rax             # T % 2 (result in %rax)
+    testq   %rax, %rax           # Check if T % 2 is 0
+    jne     .L_odd_median        # If not zero (odd), jump to odd median calculation
+
+.L_even_median:
+    # Even length
+    # N = (array[T / 2 - 1] + array[T / 2]) / 2.0;
+    movq    %r12, %rax           # T
+    shrq    $1, %rax             # T / 2 (integer division) -> index of second middle element
+    decq    %rax                 # T / 2 - 1 -> index of first middle element
+
+    movl    (%r13, %rax, 4), %esi # Load array[T/2 - 1] into %esi
+    incq    %rax                 # Now %rax is T / 2
+    movl    (%r13, %rax, 4), %edi # Load array[T/2] into %edi
+
+    # Sum the two middle elements
+    addl    %edi, %esi           # %esi = array[T/2 - 1] + array[T/2]
+
+    # Convert to double and divide by 2.0
+    # Use float division instructions
+    pxor    %xmm0, %xmm0        # Clear %xmm0
+    cvtsi2sd %esi, %xmm0        # Convert sum (integer) to double in %xmm0
+    movsd   .L_two_0_double(%rip), %xmm1 # Load 2.0 into %xmm1
+    divsd   %xmm1, %xmm0        # %xmm0 = %xmm0 / %xmm1 (sum / 2.0)
+    jmp     .L_median_exit
+
+.L_odd_median:
+    # Odd length
+    # N = array[T / 2];
+    movq    %r12, %rax           # T
+    shrq    $1, %rax             # T / 2 (integer division) -> index of median element
+
+    movl    (%r13, %rax, 4), %esi # Load array[T / 2] into %esi (integer)
+
+    # Convert to double
+    pxor    %xmm0, %xmm0        # Clear %xmm0
+    cvtsi2sd %esi, %xmm0        # Convert integer to double in %xmm0
+
+.L_median_exit:
+    # Result is in %xmm0
+    movq    %rbp, %rsp
+    popq    %rbp
+    ret
+
+.section .rodata
+.align 8
+.L_two_0_double:
+    .double 2.0

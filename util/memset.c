@@ -1,11 +1,8 @@
 
 
-#include <stdio.h>
+#include "utils.h"
 
-#define SSE_XMM_SIZE 16
-
-static const void *memclr_sse2(const void *const m_start,
-			       const size_t m_count) {
+void *__memset(void *m_start, unsigned char value, const size_t m_count) {
 	// "i" is our counter of how many bytes we've cleared
 	size_t i;
 
@@ -19,7 +16,7 @@ static const void *memclr_sse2(const void *const m_start,
 		// m_count)
 		while (((size_t)m_start + i) & (SSE_XMM_SIZE - 1) &&
 		       i < m_count) {
-			asm("stosb" ::"D"((size_t)m_start + i), "a"(0));
+			asm("stosb" ::"D"((size_t)m_start + i), "a"(value));
 			i++;
 		}
 	} else {

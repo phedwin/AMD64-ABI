@@ -1,10 +1,5 @@
 
-
-#include <errno.h>
-#include <stdint.h>
-#include <stdio.h>
-
-#define SSE_XMM_SIZE 16
+#include "utils.h"
 
 void *__memcpy(void *dst, void *src, size_t size) {
 	char *a = (char *)src, *b = dst;
@@ -48,25 +43,4 @@ void *__memcpy(void *dst, void *src, size_t size) {
 	}
 
 	return dst;
-}
-
-/* TEST memcpy */
-char buf[512], dst[512];
-int main(int argc, char *argv[]) {
-	char *pathname = argv[1];
-	FILE *f_src = fopen(pathname, "r");
-	if (f_src == 0)
-		goto __huhh;
-
-	size_t read_size;
-	read_size = fread(buf, sizeof(char), sizeof buf, f_src);
-
-	__memcpy(dst, buf, read_size);
-	dst[read_size] = '\0';
-
-	printf("%s\n", dst);
-	fclose(f_src);
-	return 0;
-__huhh:
-	return errno;
 }

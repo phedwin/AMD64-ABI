@@ -1,47 +1,14 @@
 
-default:
-	@as -o boot.o video.S
-	@ld -Ttext 0x7C00 --oformat binary -o boot.bin boot.o
-	@qemu-system-x86_64 -drive format=raw,file=boot.bin
+# build our toy compiler
+FLAG := -c
+SOURCES=fs.c toks.c
+OBJECTS=$(SOURCES:.c=.o)
+EXEC=simple_compiler
 
+default: $(SOURCES) $(EXEC)
 
+$(EXEC): $(OBJECTS)
+    $(CC) $(LDFLAGS) $(OBJECTS) -o $@
 
-CFLAGS = -Iresearch
-ASMFLAGS = -nostartfiles -lc -no-pie
-ifeq ($(OS),Windows_NT)
-  $(error  Dude?)
-endif
-
-SRC_DIR = .
-BUILD_DIR = build
-
-
-DIRS := $(shell find $(SRC_DIR) -type d)
-
-C_FILES := $(foreach dir,$(DIRS),$(wildcard $(dir)/*.c))
-
-ASM_FILES := $(foreach dir,$(DIRS),$(wildcard $(dir)/*.S))
-
-
-all: $(BUILD_DIR) $(C_FILES:%.c=$(BUILD_DIR)/%.out)
-
-
-asm: $(ASM_FILES:%.S=$(BUILD_DIR)/%.program)
-
-
-$(BUILD_DIR):
-	@mkdir -p $(BUILD_DIR)
-
-
-$(BUILD_DIR)/%.out: %.c
-	@$(CC) $(CFLAGS) -o $(BUILD_DIR)/$(@F) $<
-
-
-$(BUILD_DIR)/%.program: %.S
-	@$(CC) $(ASMFLAGS) -o $(BUILD_DIR)/$(@F) $< && ./$(BUILD_DIR)/$(@F)
-
-
-clean:
-	@rm -rf $(BUILD_DIR)
-
-.PHONY: all clean asm
+.c:
+    $(CC) $(CFLAGS) $< -o $@

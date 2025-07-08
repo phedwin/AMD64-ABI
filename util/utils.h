@@ -1,8 +1,12 @@
 #ifndef UTILITIES
 #define UTILITIES
 
+#include <ctype.h>
 #include <stdint.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
 
 #define NULL_ 0
 #define SSE_XMM_SIZE 16

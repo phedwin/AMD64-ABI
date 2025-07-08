@@ -1,35 +1,26 @@
 
     .text
+    .globl _syscall
+    .type _syscall, %function
+_syscall:
+    mov %rdi, %rax /* syscall number */
+    mov %rsi, %rdi
+    mov %rdx, %rsi
+    mov %rcx, %rdx
+    syscall
+    ret
+    
     .globl _start
     .type _start, %function
 _start:
-    cli 
-    xor %ax, %ax
-    mov %ax, %ds 
-    mov %ax, %es
-    mov %ax, %ss
-    mov $0x7c00, %sp //  -Wl, -Ttext=0x7c00
-    sti
+    // cli /* clear BIOS interrupts */
+    // xor %ax, %ax
+    // mov %ax, %ds
+    // mov %ax, %ss
+    // mov %ax, %es
+    // sti
 
-    mov $msg, %si 
-    call print
+    call kmain
 
-hang:
-    hlt
-    jmp hang
-
-print:
-    lodsb 
-    or %al, %al
-    jz .done
-    mov $0x0E, %ah
-    int $0x10
-    jmp print
-.done:
-    ret
-
-msg:
-    .string "Booted from MBR!\r\n"
-
-    .org 510
-signature: .short 0xaa55
+    // .org 510
+// .SIGNATURE: .word 0xaa55

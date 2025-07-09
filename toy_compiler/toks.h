@@ -1,5 +1,5 @@
 
-#include "utils.h"
+#include "../util/utils.h"
 
 typedef enum {
 	TOKEN_NUMBER,
@@ -29,4 +29,5 @@ struct Lexer {
 	size_t cursor;
 };
 
-struct Tokens __get_toks(struct Lexer *lexer, char *input);
+API struct Tokens *__get_toks(struct Lexer *lexer, char *input);
+API void __initialize_lex(struct Lexer *lex, char *input);

@@ -28,11 +28,10 @@ void *__memset(void *m_start, unsigned char value, const size_t m_count) {
 	// clear 64-byte chunks of memory (4 16-byte operations)
 	for (; i + 64 <= m_count; i += 64) {
 		asm volatile(
-		    " movdqa %%xmm0, 0(%0);	"  // move 16 bytes from XMM0 to
-						   // %0 + 0
-		    " movdqa %%xmm0, 16(%0);	"
-		    " movdqa %%xmm0, 32(%0);	"
-		    " movdqa %%xmm0, 48(%0);	" ::"r"((size_t)m_start + i));
+		    "movdqa %%xmm0, 0(%0);"
+		    "movdqa %%xmm0, 16(%0);"
+		    "movdqa %%xmm0, 32(%0);"
+		    "movdqa %%xmm0, 48(%0);" ::"r"((size_t)m_start + i));
 	}
 
 	// copy the remaining bytes (if any)

@@ -8,6 +8,8 @@
 #include <string.h>
 #include <unistd.h>
 
+#define API __attribute__((visibility("default"))) extern
+
 #define NULL_ 0
 #define SSE_XMM_SIZE 16
 

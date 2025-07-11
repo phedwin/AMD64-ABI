@@ -1,3 +1,4 @@
+
 /* linker.ld */
 ENTRY(main)
 OUTPUT_FORMAT("elf32-i386")

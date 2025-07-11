@@ -21,5 +21,5 @@ extern void __hex_dmp(char *);
 extern void *mem_alloc(size_t);
 
 extern void *__memcpy(void *, void *, size_t);
-extern void *__memset(void *m_start, unsigned char value, const size_t m_count);
+extern void *__memset(void *m_start, unsigned char value, const size_t N);
 #endif

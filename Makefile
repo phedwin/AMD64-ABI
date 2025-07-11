@@ -1,62 +1,50 @@
-# Variables
-CC = gcc                    # The C compiler to use
-CFLAGS = -Wall -g           # Compiler flags: -Wall (all warnings), -g (debug info)
-# FLAG := -c                # This flag is implicit in the compile rules, don't define it globally like this unless needed for specific context
-                        # It's better to put -c directly in the compile command.
+CFLAGS=-std=c11 -g -fno-common -Wall -Wno-switch
 
-# Directory where your source files are located
-SRC_DIR = src
+SRCS=$(wildcard *.c)
+OBJS=$(SRCS:.c=.o)
 
-# Source files located in SRC_DIR
-# Use 'addprefix' to put the directory path in front of each source file
-SRC_FILES = $(addprefix $(SRC_DIR)/, fs.c toks.c)
+TEST_SRCS=$(wildcard test/*.c)
+TESTS=$(TEST_SRCS:.c=.exe)
 
-# Source file in the current directory (assuming main.c is here)
-MAIN_SRC = main.c
+# Stage 1
 
-# All source files combined
-ALL_SOURCES = $(MAIN_SRC) $(SRC_FILES)
+chibicc: $(OBJS)
+	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
 
-# Object files. Use 'patsubst' to substitute paths and suffixes.
-# $(patsubst %.c, %.o, $(SRC_FILES)) will create src/fs.o src/toks.o
-# $(MAIN_SRC:.c=.o) will create main.o
-OBJECTS = $(MAIN_SRC:.c=.o) $(patsubst $(SRC_DIR)/%.c, $(SRC_DIR)/%.o, $(SRC_FILES))
+$(OBJS): chibicc.h
 
+test/%.exe: chibicc test/%.c
+	./chibicc -Iinclude -Itest -c -o test/$*.o test/$*.c
+	$(CC) -pthread -o $@ test/$*.o -xc test/common
 
-# Final executable name
-EXEC = simple_compiler
+test: $(TESTS)
+	for i in $^; do echo $$i; ./$$i || exit 1; echo; done
+	test/driver.sh ./chibicc
 
-# The default target (what happens when you just type 'make')
-# It should depend on the executable
-.PHONY: all
-all: $(EXEC)
+test-all: test test-stage2
 
-# Rule to build the executable
-# The executable depends on all object files
-$(EXEC): $(OBJECTS)
-	$(CC) $(CFLAGS) $(OBJECTS) -o $@
+# Stage 2
 
-# Generic rule for compiling .c files into .o files
-# This is a pattern rule: %.o depends on %.c
-# Make knows how to apply this to all object files derived from C files.
-# For files in SRC_DIR, we need a specific pattern.
+stage2/chibicc: $(OBJS:%=stage2/%)
+	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
 
-# Rule for compiling .c files in the current directory (e.g., main.c)
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+stage2/%.o: chibicc %.c
+	mkdir -p stage2/test
+	./chibicc -c -o $(@D)/$*.o $*.c
 
-# Rule for compiling .c files in the 'src/' directory
-# This handles src/fs.o and src/toks.o
-$(SRC_DIR)/%.o: $(SRC_DIR)/%.c
-	$(CC) $(CFLAGS) -c $< -o $@
+stage2/test/%.exe: stage2/chibicc test/%.c
+	mkdir -p stage2/test
+	./stage2/chibicc -Iinclude -Itest -c -o stage2/test/$*.o test/$*.c
+	$(CC) -pthread -o $@ stage2/test/$*.o -xc test/common
 
+test-stage2: $(TESTS:test/%=stage2/test/%)
+	for i in $^; do echo $$i; ./$$i || exit 1; echo; done
+	test/driver.sh ./stage2/chibicc
 
-# Clean rule: remove all generated files
-.PHONY: clean
+# Misc.
+
 clean:
-	rm -f $(EXEC) $(OBJECTS) $(SRC_DIR)/*.o
+	rm -rf chibicc tmp* $(TESTS) test/*.s test/*.exe stage2
+	find * -type f '(' -name '*~' -o -name '*.o' ')' -exec rm {} ';'
 
-# Phony targets:
-# .PHONY is a special directive that tells Make that 'all' and 'clean' are
-# not actual files to be created. This prevents issues if you happen to
-# create a file named 'all' or 'clean' in your directory.
+.PHONY: test clean test-stage2

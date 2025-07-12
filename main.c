@@ -585,7 +585,7 @@ static void assemble(char *input, char *output) {
 
 static char *find_file(char *pattern) {
 	char *path = NULL;
-	glob_t buf = {};
+	glob_t buf = { 0 };
 	glob(pattern, 0, NULL, &buf);
 	if (buf.gl_pathc > 0)
 		path = strdup(buf.gl_pathv[buf.gl_pathc - 1]);

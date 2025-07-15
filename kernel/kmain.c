@@ -1,35 +1,78 @@
 
+#include <stdarg.h>
 
-#include <stdio.h>
-#include <stdlib.h>
-typedef unsigned long u64;
+#define STDOUT_FILENO 1
+
+typedef signed int i32;
 typedef unsigned char u8;
-extern u64 _syscall(int sysNo, void *, void *, void *, void *);
+typedef signed long int i64;
 
-u64 _strlen(char *p) {
+extern i64 __write(u8 fd, void *buf, i64);  // fd, buf, count
+extern void __exit(i32) __attribute__((noreturn));
+
+void __strlen(char *p, i64 *rc) {
 	char *pp = p;
-	while (*pp)
-		pp++;
-	return pp - p;
+	do {
+	} while (*pp++);
+	*rc = pp - p;
 }
 
-typedef unsigned short u16;
-void write_16b(u16 *p, u16 w_value) {
-	*p = w_value >> 8 & 0xff | w_value & 0xff;
-	return;
-}
-void read_16B(u16 bytes, u8 *results) {
-	*results = bytes & 0xff;
-	*(results + 1) = (bytes >> 8) & 0xff;
-	return;
-}
-void main() {
-	u8 *T = malloc(sizeof(u8 *));
-	read_16B(4095, T);
-	printf("%d", *(T + 1));
-	// char *buf = "Hello world!";
+void __attribute__((format(printf, 3, 4))) __snprintf(char *p,
+						      i64 offset,
+						      char *word,
+						      ...) {
+	va_list ap;
+	va_start(ap, word);
+	//
 
-	return;
-	// u64 FD_STDOUT = 1, size = _strlen(buf);
-	// u64 rc = _syscall(1, (void *)&FD_STDOUT, buf, (void *)&size, 0);
+	va_end(ap);
+}
+
+extern void __add_values_effect_with_us8_asm(u8 *v, u8 *w);
+
+static inline int itoa_u8(unsigned char val, char *dst) {
+	int len = 0;
+	if (val >= 100) {
+		dst[len++] = '0' + val / 100;
+		val %= 100;
+	}
+	if (val >= 10 || len > 0) {
+		dst[len++] = '0' + val / 10;
+		val %= 10;
+	}
+	dst[len++] = '0' + val;
+	return len;
+}
+
+void kmain(int argc, char **argv, char **envp) {
+	/* packed addtions*/
+	u8 d[4] = { 13, 34, 35, 45 }, w[4] = { 12, 32, 43, 1 };
+	char buf[1024];
+
+	/* memset(buf, 0x00, sizeof buf)*/
+	__asm__ volatile("rep; stosb" ::"a"(0x00), "D"(buf), "c"(sizeof buf));
+	__add_values_effect_with_us8_asm(d, w);
+
+	int pos = 0;
+	for (int r = 0; r < 4; r++) {
+		pos += itoa_u8(d[r], &buf[pos]);
+		buf[pos++] = ' ';
+	}
+	buf[pos] = 0;
+
+	i64 rc;
+	__strlen(buf, &rc);
+	__write(STDOUT_FILENO, buf, rc);
+
+	__write(STDOUT_FILENO, "\n", 1);
+	for (int r = 0; r < argc; r++) {
+		i64 current_arg_length;
+		__strlen(argv[r], &current_arg_length);
+
+		__write(STDOUT_FILENO, argv[r], current_arg_length);
+
+		__write(STDOUT_FILENO, "\n", 1);
+	}
+
+	__exit(0);
 }

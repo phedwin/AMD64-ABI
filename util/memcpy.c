@@ -1,7 +1,7 @@
 
 #include "utils.h"
 
-void *__memcpyx(void *dst, void *src, size_t size) {
+void *__memcpy(void *dst, void *src, size_t size) {
 	char *a = (char *)src, *b = dst;
 
 	if (a == 0 || b == 0)

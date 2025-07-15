@@ -1,9 +1,14 @@
 
-#include "../linkage.h"
+// #define EXPORT_SYM(value) 
+//     .globl value; \
+//     .type value, %function; \
+//     value:;
+
 format: .asciz "%s"
 
-
-FUNCTION(_start):    
+    .globl _start
+    .type _start, %function
+_start:
     movq (%rsp), %rdi
     leaq 8(%rsp), %rsi
 

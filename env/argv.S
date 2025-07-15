@@ -14,6 +14,9 @@ _start:
     lea 8(%rbp), %rbx                # Load the effective address of 8 bytes offset from %rbp into %rbx.
                                      # This address points to the beginning of the argv array (argv[0]).
                                      # The arguments are placed on the stack after argc.
+    mov %rdi, %rcx                                     
+    inc %rcx /* &argv[argv + 1] == envp  */
+    mov (%rbx, %rcx, 8), %rbx                                     
 
 .loop:
     mov (%rbx), %rsi                 # Move the value at the memory location pointed to by %rbx into %rsi.

@@ -1,7 +1,7 @@
-CFLAGS=-std=c11 -g -fno-common -Wall -Wno-switch
+CFLAGS=-std=c99 -g -fno-common -Wall -Wno-switch
 
 SRCS=$(wildcard *.c)
-OBJS=$(SRCS:.c=.o)
+OBJS+=$(patsubst %.c, %.o, $(SRCS))
 
 TEST_SRCS=$(wildcard test/*.c)
 TESTS=$(TEST_SRCS:.c=.exe)

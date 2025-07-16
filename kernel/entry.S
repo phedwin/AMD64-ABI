@@ -1,12 +1,4 @@
-// .file entry.S
 
-#define EXPORT_SYM(sym) .globl sym; .type sym, %function; sym:
-#define LOCAL_SYM(sym) sym:
-#define UNREACHABLE nop
-#define SYS_WRITE 1
-#define SYS_EXIT 60
-
-//
     .text
 EXPORT_SYM(__write)
     mov $SYS_WRITE, %rax

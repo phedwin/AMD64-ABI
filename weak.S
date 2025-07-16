@@ -1,0 +1,2 @@
+
+.weak value, value2, value3, value4 /// //  // 

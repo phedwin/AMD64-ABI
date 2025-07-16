@@ -17,7 +17,7 @@ BINARIES += $(patsubst %.c,$(BUILD)/%.bin,$(FILE_C))
 bin: $(BINARIES)
 $(BUILD)/%.bin: %.S
 	@mkdir -p $(BUILD)
-	$(CC) $(DEBUG) $(FLAGS) $< -o $@ 
+	$(CC) $(DEBUG) $(FLAGS) $< -o $@ #$(BUILD)/weak.o
 $(BUILD)/%.bin: %.c
 	@mkdir -p $(BUILD)
 	$(CC) $(MACHINE) $(CFLAGS) $(DEBUG) $< -o $@

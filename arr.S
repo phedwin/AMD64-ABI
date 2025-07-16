@@ -1,30 +1,40 @@
 
+#include "include.p"
+
+    .file "arr.S"
+
+
+
 	.data
-value: .int 4,54,514,6,50
+value: .4byte 4,54,514,6,50
 len = . - value
 fmt: .string "%d\n"
 
-
-
 	.text
+    .type __effect_rbx, %function
+__effect_rbx:
+    SAVE_CALLEE_SAVED %rbx
+    mov $1, %rbx
+    RESTORE_CALLEE_SAVED %rbx
+    ret
+
 	.globl _start
 	.type _start, %function
 _start:
-    movl $len, %ecx 
-    shrl $2, %ecx
-    decl %ecx
+    movl $len, %ebx
+    shrl $2, %ebx
+    decl %ebx
+    leaq value(%rip) /* saved */, %r12 
 1:
-    cmp $0, %ecx
+    cmp $0, %ebx
     jl 2f
 
-    leal value(, %ecx, 4), %ebx
     leaq fmt(%rip), %rdi
-    movl (%ebx), %esi
+    leaq (%r12, %rbx, 4), %rsi
+    mov (%rsi), %rsi 
     xor %al, %al
-    pushq %rcx
     call printf@PLT
-    popq %rcx
-    dec %ecx
+    dec %ebx
     jmp 1b
 
 2:

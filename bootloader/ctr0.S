@@ -9,7 +9,6 @@ EXPORT_SYM(__exit)
     mov $SYS_EXIT, %rax
     syscall
 
-// bootstrap entry
 EXPORT_SYM(_start)
     movq 0(%rsp), %rdi
     leaq 8(%rsp), %rsi 

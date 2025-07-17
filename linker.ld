@@ -11,7 +11,7 @@ PHDRS {
 
 SECTIONS {
   /* Virtual memory base address for code (like what Linux expects) */
-  . = 0x08048000;
+  /* . = 0x08048000; */
 
   /* Code segment */
   .text : {

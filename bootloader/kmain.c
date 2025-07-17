@@ -1,11 +1,10 @@
 
 #include <stdarg.h>
-
-#define STDOUT_FILENO 1
-
 typedef signed int i32;
 typedef unsigned char u8;
 typedef signed long int i64;
+
+#define STDOUT_FILENO 1
 
 extern i64 __write(u8 fd, void *buf, i64);  // fd, buf, count
 extern void __exit(i32) __attribute__((noreturn));
@@ -50,7 +49,6 @@ void kmain(int argc, char **argv, char **envp) {
 	char buf[1024];
 
 	/* memset(buf, 0x00, sizeof buf)*/
-	__asm__ volatile("rep; stosb" ::"a"(0x00), "D"(buf), "c"(sizeof buf));
 	__add_values_effect_with_us8_asm(d, w);
 
 	int pos = 0;

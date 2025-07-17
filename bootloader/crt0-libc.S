@@ -12,6 +12,7 @@ abitag:
     .long	8, 4, 1
 	.string	"FreeBSD"
 	.long	802000
+    
 	.data
 	.p2align 2
 

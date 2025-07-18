@@ -1,7 +1,3 @@
-#include "include.p"
-
-    .text
-
 SYSCALL(write)
 SYSCALL(open)
 SYSCALL(close)

@@ -28,7 +28,7 @@ bin: $(BINARIES)
 $(BUILD)/%.bin: %.S
 	@mkdir -p $(BUILD)
 	@mkdir -p $(BUILD)/$(SUBDIRS)
-	$(CC) $(FLAGS) $(CFLAGS) $< -o $@
+	$(CC) $(FLAGS) $(CFLAGS) $< -o $@ build/editor.o
 $(BUILD)/%.bin: %.c
 	@mkdir -p $(BUILD)
 	@mkdir -p $(BUILD)/$(SUBDIRS)

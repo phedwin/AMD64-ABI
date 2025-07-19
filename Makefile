@@ -9,6 +9,7 @@ FILE_C := $(wildcard *.c)
 
 #/* sub directories */
 SUBDIRS := editor
+SUBDIRS += vm
 SUBDIR_C := $(foreach dir,$(SUBDIRS),$(wildcard $(dir)/*.c))
 SUBDIR_S := $(foreach dir,$(SUBDIRS),$(wildcard $(dir)/*.S))
 

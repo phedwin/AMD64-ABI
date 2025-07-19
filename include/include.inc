@@ -89,7 +89,6 @@ SYSCALL(rename)
 SYSCALL(chmod)
 SYSCALL(exit)
 
-
 /* c_cflag bits.  */
 #define CSIZE	0000060
 #define   CS5	0000000

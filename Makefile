@@ -1,6 +1,6 @@
 BUILD := build
 FLAGS := -no-pie -nostartfiles -ffreestanding
-CFLAGS := -Wall -Iinclude -g
+CFLAGS := -Iinclude -g
 
 
 #/* top level  c & asm file */

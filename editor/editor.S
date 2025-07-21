@@ -24,6 +24,7 @@ EXPORT_SYM(_start)
     movw $1024, %dx
     call sys_read
     pushq %rax
+
 .L__write__stdout:
     movb $SYS_WRITE, %al
     movb $STDOUT_FILENO, %dil

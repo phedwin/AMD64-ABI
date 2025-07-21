@@ -1,3 +1,4 @@
+/**/
     .data
 fmt: .asciz "%s\n"  # Format string for printf: print a string followed by a newline
 

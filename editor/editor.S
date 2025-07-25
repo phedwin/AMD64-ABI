@@ -54,7 +54,7 @@ EXPORT_SYM(enable_raw_mode)
     leaq original_termios(%rip), %rsi
     leaq raw_termios(%rip), %rdi
     movq $TERMIOS_STRUCT_SIZE_MAGIC, %rdx 
-    call __memcpy
+    // call __memcpy /* where? */
 
 .L__patch_raw_termios:
     // 0 - 3 input mode flags 

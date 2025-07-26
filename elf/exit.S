@@ -6,6 +6,5 @@
 main:
     mov $60, %eax
     mov $1, %dil
-    // xor %dil, %dil
     syscall
 

@@ -156,7 +156,7 @@ fn create_program() -> Vec<u8> {
         // push + pop is 2+1 bytes, which is slightly shorter than even mov(eax, 60)
         a.push(60)?;
         a.pop(rax)?;
-        // a.mov(eax, 60)?;
+        a.mov(eax, 60)?;
         // zero edi in two bytes
         a.xor(edi, edi)?;
         a.syscall()?;
@@ -177,7 +177,7 @@ mod test_program {
     }
 }
 
-pub fn write_elf<P: AsRef<Path>>(path: P) -> std::io::Result<()> {
+pub fn write_elf(path: &'a str) -> std::io::Result<()> {
     let buf = create_elf(&create_program());
     let mut options = OpenOptions::new();
     options.write(true).create(true).mode(0o755);

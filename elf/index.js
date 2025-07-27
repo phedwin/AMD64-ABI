@@ -1,5 +1,5 @@
 import "fs";
-import { closeSync, openSync, readSync } from "fs";
+import { closeSync, openSync, readSync, stat } from "fs";
 import { exit } from "process";
 
 const SEEK_SET = 0; /* Seek from beginning of file.  */
@@ -18,30 +18,32 @@ const ELFMAG2 = "L"; /* Magic number byte 2 */
 const EI_MAG3 = 3; /* File identification byte 3 index */
 const ELFMAG3 = "F"; /* Magic number byte 3 */
 
-const elf_check_file = () => {
-    const buffer = read_magic();
-    const mag_str = buffer.toString();
-    console.log(mag_str);
+/* Conglomeration of the identification bytes, for easy testing as a word.  */
+const ELFMAG = "\x7fELF";
 
-    if (
-        buffer[EI_MAG0] == ELFMAG0 &&
-        buffer[EI_MAG1] == ELFMAG1 &&
-        buffer[EI_MAG2] == ELFMAG2 &&
-        buffer[EI_MAG3] == ELFMAG3
-    ) {
-        return true;
+const elf_check_file = (filename) => {
+    /* is this how js compares strings? doesnt make sense ➜ stringa == stringb; */
+    let status = false;
+    let buffer = read_magic(filename).toString();
+    let index;
+    if (buffer.length == ELFMAG.length) {
+        for (index = 0; buffer.length > index; index++)
+            if (buffer.charAt(index) != ELFMAG.charAt(index)) break;
+        --index;
+        /* haha lmao */
+        if (buffer.charAt(index) == ELFMAG3) status = true;
     }
-    return false;
+    return status;
 };
 
 const read_magic = (filename) /*: Buffer<ArrayBuffer> */ => {
-    if (filename == null) filename = "images.bin";
-    const buffer = Buffer.alloc(8, 0); /* read the first 8 bytes  */
-    let fd = openSync(filename, "w+");
+    // xxd -g2 -l4 filename
+    let buffer = Buffer.alloc(4, 0); /* read the first 4 bytes  */
+    let fd = openSync(filename);
     if (fd < 0) exit(1);
-    readSync(fd, buffer, 0, 8, SEEK_SET);
+    readSync(fd, buffer, 0, 4, SEEK_SET);
     closeSync(fd);
     return buffer;
 };
 
-elf_check_file("image.bin");
+console.log(elf_check_file("exit.bin"));

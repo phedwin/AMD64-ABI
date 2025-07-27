@@ -21,12 +21,13 @@
 #   
 #*/
 
+
     .text
     .globl main
     .type main, %function
 main:
-    mov     $1, %eax    #// Syscall number for exit (SYS_exit) is 1 on 32-bit Linux
     mov     $1, %ebx    #// Exit status 1
+    mov     $1, %eax    #// Syscall number for exit (SYS_exit) is 1 on 32-bit Linux
     int     $0x80       #// Perform the 32-bit syscall via interrupt 0x80
 
 

@@ -10,4 +10,4 @@ tiny_asm: tiny.s
 tiny: src/main.rs
 	cargo run
 clean: 
-	rm -rf target *.bin *.out *.o *.bin *.puff
+	rm -rf target *.bin *.out *.o *.bin *.puff *.log

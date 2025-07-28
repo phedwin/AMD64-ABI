@@ -1,13 +1,117 @@
-
+#define DEBUGGER(...) fprintf(stderr, __VA_ARGS__)
 
 #include <assert.h>
 #include <errno.h>
 #include <fcntl.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <sys/stat.h>
 #include <unistd.h>
+
+#define memset_b(ptr, value, size)                                    \
+	do {                                                          \
+		__asm__ volatile("rep; stosb" ::"a"(value), "D"(ptr), \
+				 "c"(size));                          \
+	} while (0);
+
+int init_syscall(char *sys_name);
+typedef union {
+	struct {
+		uint64_t rax, rdi, rsi, rdx, r10, r8, r9;
+	} Reg64;
+	struct {
+		uint32_t ebx, ecx, edx, esi, edi, ebp;
+	} Reg32;
+
+} SyscallRegister;
+
+#include <stdarg.h>
+/* i wrote this routine with a smile on my face btw */
+void *syscall_arguments(char *name, uint64_t Nos, ...) {
+	SyscallRegister *p = malloc(sizeof(SyscallRegister));
+	p->Reg64.rax = init_syscall(name);
+	uint64_t *block;
+	va_list args;
+	va_start(args, Nos);
+	block = malloc(sizeof(uint64_t) * 6 /*__size=6*/);
+	if (!block)
+		goto defer;
+	memset_b(block, 0x000, sizeof(uint64_t) * 6 /*__n=6*/);
+	for (int v = 0; v < Nos; v++)
+		block[v] = va_arg(args, uint64_t);
+	va_end(args);
+	/* sometimes a little repetition is not bad actually */
+#if defined(__x86_64) && __linux__
+	// clang-format off
+    p->Reg64.rdi    = block[0];
+    p->Reg64.rsi    = block[1];
+    p->Reg64.rdx    = block[2];
+    p->Reg64.r10    = block[3];
+    p->Reg64.r8     = block[4];
+    p->Reg64.r9     = block[5];
+	// clang-format on
+#else
+	// TODO
+#endif
+	free(block);
+	return p;
+defer:
+	return 0;
+}
+SyscallRegister *sys;
+void rlse() {
+	free(sys);
+}
+int main(void) {
+	// atexit(rlse);
+	sys = syscall_arguments("exit", 1, 130);
+
+	printf("syscall %lu argument rdi - %lu", sys->Reg64.rax,
+	       sys->Reg64.rdi);
+
+	__asm__ volatile(
+	    "movq %0, %%rax;"
+	    "syscall;" ::"a"(sys->Reg64.rax),
+	    "D"(sys->Reg64.rdi));
+}
+
+struct Syscalls {
+	char *name;
+	int sysNo;
+	int __pad;
+
+} const x86syscalls[] = { { "read", 0x000 },
+			  { "write", 0x1 },
+			  { "exit", 0x03c },
+			  { "open", 0x03 },
+			  { "mmap", 0x09 } };
+
+int init_syscall(char *sys_name) {
+	for (int sysno = 0; sysno < sizeof(x86syscalls) / sizeof(*x86syscalls);
+	     sysno++) {
+		if (!strcmp(x86syscalls[sysno].name, sys_name))
+			return x86syscalls[sysno].sysNo;
+	}
+
+	return -1;
+}
+#define SYSCALL(name, ...)                  \
+	do {                                \
+		int v = init_syscall(name); \
+		__asm__(                    \
+		    "mov %1, %%eax;"        \
+		    "syscall" ::i "v",      \
+		    "D"(0), "S"(), );       \
+	} while (0);
+
+#define sys_exit(value)                       \
+	do {                                  \
+		__asm__ volatile(             \
+		    "movb $0x3c, %%al;"       \
+		    "syscall;" ::"D"(value)); \
+	} while (0);
 
 #define CWD "."
 
@@ -19,7 +123,6 @@ typedef unsigned u32;
 typedef void NO_WHERE;
 
 #include <stdbool.h>
-#define DEBUGGER(...) fprintf(stderr, __VA_ARGS__)
 #define ERROR DEBUGGER
 
 struct globResults *find_binary();
@@ -48,6 +151,7 @@ __inline void file_exists_cwd(char *dirpath,
 
 static char *filename;
 glob_t globs;
+_Thread_local int value = 0;
 
 struct globResults {
 	unsigned char argc;
@@ -115,14 +219,7 @@ defer:
 		free(res);
 	}
 	perror("Error");
-	exit(EXIT_FAILURE);
-}
-
-int main(void) {
-	char *filename = "exec_elf.bin";
-	read_elf_header(filename);
-
-	printf("%s\n", &elf[EI_MAG0] /* printf will 0 terminate */);
+	sys_exit(EXIT_FAILURE);
 }
 
 __inline void file_exists_cwd(char *dirpath,

@@ -5,6 +5,8 @@
 #include <termios.h>
 #include <unistd.h>
 
+//^^
+
 struct termios termios;
 
 void die(const char *s) {

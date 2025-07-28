@@ -27,61 +27,6 @@ typedef union {
 
 } SyscallRegister;
 SyscallRegister *sys;
-
-struct Machine {
-	uint64_t *ip;
-	SyscallRegister *state;
-};
-#include <stdarg.h>
-/* i wrote this routine with a smile on my face btw */
-void *syscall_arguments(char *name, uint64_t Nos, ...) {
-	SyscallRegister *p = malloc(sizeof(SyscallRegister));
-	p->Reg64.rax = init_syscall(name);
-	uintptr_t *block;
-	va_list args;
-	va_start(args, Nos);
-	block = malloc(sizeof(uint64_t) * 6 /*__size=6*/);
-	if (!block)
-		goto defer;
-	memset_b(block, 0x000, sizeof(uint64_t) * 6 /*__n=6*/);
-	for (uint64_t v = 0, inc = 0; v < Nos; v++, inc += 8)
-		memcpy(block + inc, va_arg(args, void *), sizeof(void *));
-	va_end(args);
-
-#if defined(__x86_64) && __linux__
-#define PTR_SIZE sizeof(void *)
-	char *h = (char *)block;
-
-	// clang-format off
-	/* sometimes a little repetition is not bad actually */
-	memcpy(&p->Reg64.rdi, block,       PTR_SIZE);
-	memcpy(&p->Reg64.rsi, block += 8,  PTR_SIZE);
-	memcpy(&p->Reg64.rdx, block += 8,  PTR_SIZE);
-	memcpy(&p->Reg64.r10, block += 8,  PTR_SIZE);
-	memcpy(&p->Reg64.r8,  block += 8,  PTR_SIZE);
-	memcpy(&p->Reg64.r9,  block += 8,  PTR_SIZE);
-	// clang-format on
-#else
-	// TODO
-#endif
-	free(h);
-	return p;
-defer:
-	return 0;
-}
-
-int main(void) {
-	char *buf = "hello world";
-	uint64_t fd = STDOUT_FILENO, len = strlen(buf);
-	sys = syscall_arguments("write", 3, &fd, buf, &len);
-
-	__asm__ volatile("syscall;" ::"a"(sys->Reg64.rax), "D"(sys->Reg64.rdi),
-			 "S"(buf), "d"(sys->Reg64.rdx));
-
-	free(sys);
-	return 0;
-}
-
 struct Syscalls {
 	char *name;
 	int sysNo;
@@ -93,6 +38,17 @@ struct Syscalls {
 			  { "open", 0x03 },
 			  { "mmap", 0x09 } };
 
+int syscall_handler(SyscallRegister *sys) {
+	int return_t;
+	__asm__ volatile("syscall;"
+			 : "=a"(return_t)
+			 : "a"(sys->Reg64.rax), "D"(sys->Reg64.rdi),
+			   "S"(sys->Reg64.rsi), "d"(sys->Reg64.rdx),
+			   "r"(sys->Reg64.r10), "r"(sys->Reg64.r8),
+			   "r"(sys->Reg64.r9));
+	return return_t;
+}
+
 int init_syscall(char *sys_name) {
 	/*TODO incase we use this in the future - please switch to a table*/
 	for (int sysno = 0; sysno < sizeof(x86syscalls) / sizeof(*x86syscalls);
@@ -103,21 +59,63 @@ int init_syscall(char *sys_name) {
 
 	return -1;
 }
-#define SYSCALL(name, ...)                  \
-	do {                                \
-		int v = init_syscall(name); \
-		__asm__(                    \
-		    "mov %1, %%eax;"        \
-		    "syscall" ::i "v",      \
-		    "D"(0), "S"(), );       \
-	} while (0);
 
-#define sys_exit(value)                       \
-	do {                                  \
-		__asm__ volatile(             \
-		    "movb $0x3c, %%al;"       \
-		    "syscall;" ::"D"(value)); \
-	} while (0);
+#include <stdarg.h>
+/* i wrote this routine with a smile on my face btw */
+void *syscall_arguments(char *name, uint64_t Nos, ...) {
+	SyscallRegister *p = malloc(sizeof(SyscallRegister));
+	p->Reg64.rax = init_syscall(name);
+	uint64_t *block;
+	va_list args;
+	va_start(args, Nos);
+	block = malloc(sizeof(uint64_t) * 6 /*__size=6*/);
+	if (!block)
+		goto defer;
+	memset_b(block, 0x000, sizeof(uint64_t) * 6 /*__n=6*/);
+
+	for (uint64_t v = 0; v < Nos; v++)
+		block[v] = va_arg(args, uint64_t);
+
+	/*block + sizeof -> leaq block(, v, 8) */
+	va_end(args);
+
+#if defined(__x86_64) && __linux__
+#define PTR_SIZE sizeof(void *)
+	char *h = (char *)block;
+
+	// clang-format off
+	/* sometimes a little repetition is not bad actually */
+	p->Reg64.rdi = block[0];
+	p->Reg64.rsi = block[1];
+	p->Reg64.rdx = block[2];
+	p->Reg64.r10 = block[3];
+	p->Reg64.r8  = block[4];
+	p->Reg64.r9  = block[5];
+	// clang-format on
+#else
+	// TODO
+#endif
+	free(h);
+	return p;
+defer:
+	return 0;
+}
+
+int main(void) {
+	char *buf = "hello world\n";
+	uint64_t fd = STDOUT_FILENO, len = strlen(buf), status;
+	sys = syscall_arguments("write", 3, fd, (uint64_t)buf, len);
+
+	if (!sys)
+		return EXIT_FAILURE;
+	status = syscall_handler(sys);
+	if (status < 0) {
+		perror("write Error");
+		return EXIT_FAILURE;
+	}
+	free(sys);
+	return EXIT_SUCCESS;
+}
 
 #define CWD "."
 
@@ -225,7 +223,7 @@ defer:
 		free(res);
 	}
 	perror("Error");
-	sys_exit(EXIT_FAILURE);
+	exit(EXIT_FAILURE);
 }
 
 __inline void file_exists_cwd(char *dirpath,

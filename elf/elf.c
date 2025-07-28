@@ -26,55 +26,60 @@ typedef union {
 	} Reg32;
 
 } SyscallRegister;
+SyscallRegister *sys;
 
+struct Machine {
+	uint64_t *ip;
+	SyscallRegister *state;
+};
 #include <stdarg.h>
 /* i wrote this routine with a smile on my face btw */
 void *syscall_arguments(char *name, uint64_t Nos, ...) {
 	SyscallRegister *p = malloc(sizeof(SyscallRegister));
 	p->Reg64.rax = init_syscall(name);
-	uint64_t *block;
+	uintptr_t *block;
 	va_list args;
 	va_start(args, Nos);
 	block = malloc(sizeof(uint64_t) * 6 /*__size=6*/);
 	if (!block)
 		goto defer;
 	memset_b(block, 0x000, sizeof(uint64_t) * 6 /*__n=6*/);
-	for (int v = 0; v < Nos; v++)
-		block[v] = va_arg(args, uint64_t);
+	for (uint64_t v = 0, inc = 0; v < Nos; v++, inc += 8)
+		memcpy(block + inc, va_arg(args, void *), sizeof(void *));
 	va_end(args);
-	/* sometimes a little repetition is not bad actually */
+
 #if defined(__x86_64) && __linux__
+#define PTR_SIZE sizeof(void *)
+	char *h = (char *)block;
+
 	// clang-format off
-    p->Reg64.rdi    = block[0];
-    p->Reg64.rsi    = block[1];
-    p->Reg64.rdx    = block[2];
-    p->Reg64.r10    = block[3];
-    p->Reg64.r8     = block[4];
-    p->Reg64.r9     = block[5];
+	/* sometimes a little repetition is not bad actually */
+	memcpy(&p->Reg64.rdi, block,       PTR_SIZE);
+	memcpy(&p->Reg64.rsi, block += 8,  PTR_SIZE);
+	memcpy(&p->Reg64.rdx, block += 8,  PTR_SIZE);
+	memcpy(&p->Reg64.r10, block += 8,  PTR_SIZE);
+	memcpy(&p->Reg64.r8,  block += 8,  PTR_SIZE);
+	memcpy(&p->Reg64.r9,  block += 8,  PTR_SIZE);
 	// clang-format on
 #else
 	// TODO
 #endif
-	free(block);
+	free(h);
 	return p;
 defer:
 	return 0;
 }
-SyscallRegister *sys;
-void rlse() {
-	free(sys);
-}
+
 int main(void) {
-	// atexit(rlse);
-	sys = syscall_arguments("exit", 1, 130);
+	char *buf = "hello world";
+	uint64_t fd = STDOUT_FILENO, len = strlen(buf);
+	sys = syscall_arguments("write", 3, &fd, buf, &len);
 
-	printf("syscall %lu argument rdi - %lu", sys->Reg64.rax,
-	       sys->Reg64.rdi);
+	__asm__ volatile("syscall;" ::"a"(sys->Reg64.rax), "D"(sys->Reg64.rdi),
+			 "S"(buf), "d"(sys->Reg64.rdx));
 
-	__asm__ volatile(
-	    "movq %0, %%rax;"
-	    "syscall;" ::"a"(sys->Reg64.rax),
-	    "D"(sys->Reg64.rdi));
+	free(sys);
+	return 0;
 }
 
 struct Syscalls {
@@ -89,6 +94,7 @@ struct Syscalls {
 			  { "mmap", 0x09 } };
 
 int init_syscall(char *sys_name) {
+	/*TODO incase we use this in the future - please switch to a table*/
 	for (int sysno = 0; sysno < sizeof(x86syscalls) / sizeof(*x86syscalls);
 	     sysno++) {
 		if (!strcmp(x86syscalls[sysno].name, sys_name))

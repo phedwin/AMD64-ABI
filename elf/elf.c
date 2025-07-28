@@ -23,10 +23,8 @@ typedef void NO_WHERE;
 #define ERROR DEBUGGER
 
 struct globResults *find_binary();
-#include <assert.h>  // For both assert() and _Static_assert
+#include <assert.h>
 #include <stdio.h>
-
-// Example of a conditional compile-time assert
 #if __STDC_VERSION__ > 201112L
 #define MY_COMPILE_TIME_ASSERT(condition, message) \
 	_Static_assert(condition, message)

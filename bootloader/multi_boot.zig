@@ -27,7 +27,8 @@ export fn _start() callconv(.Naked) noreturn {
 }
 
 pub fn panic(msg: []const u8, error_return_trace: ?*builtin.StackTrace) noreturn {
-    @setCold(true);
+    _ = error_return_trace; // autofix
+    // @setCold(true);
     terminal.write("KERNEL PANIC: ");
     terminal.write(msg);
     while (true) {}
@@ -62,7 +63,7 @@ fn vga_entry_color(fg: VgaColor, bg: VgaColor) u8 {
 }
 
 fn vga_entry(uc: u8, color: u8) u16 {
-    var c: u16 = color;
+    const c: u16 = color;
 
     return uc | (c << 8);
 }

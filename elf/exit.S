@@ -1,6 +1,6 @@
     .code64
 
-    .section .deubbger
+    .section .debugger
 .Ldebug_value: 
     ret
 
@@ -22,7 +22,8 @@ main:
     syscall
 
 
-    .section .text_wildcard # does this works *(.text*)
+    // does this works *(.text*)
+    .section .text_wildcard 
     .globl new_section
     .type new_section, %function
 new_section:

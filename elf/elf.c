@@ -1,3 +1,4 @@
+#include <elf.h>
 #define DEBUGGER(...) fprintf(stderr, __VA_ARGS__)
 
 #include <assert.h>
@@ -101,7 +102,79 @@ defer:
 	return 0;
 }
 
-int main(void) {
+#include <sys/mman.h>
+char *filename = "exit.o";
+uint64_t size__, fd;
+struct stat stats;
+void *mmap_file() {
+	fd = open(filename, O_RDONLY);
+	if (fd < 0)
+		goto defer;
+	if (fstat(fd, &stats) < 0)
+		goto defer;
+	size__ = stats.st_size;
+
+	void *mem = mmap(NULL, size__, PROT_READ, MAP_PRIVATE, fd, SEEK_SET);
+	if (mem == MAP_FAILED)
+		goto defer;
+	close(fd);
+	return mem;
+defer:
+	perror("Error");
+	if (fd)
+		close(fd);
+	return MAP_FAILED;
+}
+
+int main(int argc, char *argv[]) {
+	char *path = argv[1];
+	if (path)
+		filename = strdup(path);
+	char *elf_data = mmap_file();
+	if (!elf_data)
+		exit(EXIT_FAILURE);
+
+	Elf64_Ehdr *hdr = (Elf64_Ehdr *)elf_data;
+	/* TODO confirm its an ELF - anyway just proceed this is not production
+	 * code */
+
+	printf("ELF Header:\n");
+	printf("  Entry Point Address: 0x%lx\n", hdr->e_entry);
+	printf("  Section Header Offset: 0x%lx\n", hdr->e_shoff);
+	printf("  Number of Sections: %u\n", hdr->e_shnum);
+	printf("  Section Header String Table Index: %u\n", hdr->e_shstrndx);
+	printf("\n");
+
+	// Get the section header table
+	Elf64_Shdr *shdr_table = (Elf64_Shdr *)(elf_data + hdr->e_shoff);
+
+	// Get the section header string table section header
+	if (hdr->e_shstrndx >= hdr->e_shnum) {
+		fprintf(stderr, "Invalid section header string table index.\n");
+		munmap(elf_data, size__);
+		return 1;
+	}
+	Elf64_Shdr *shstrtab_hdr = &shdr_table[hdr->e_shstrndx];
+
+	char *shstrtab = elf_data + shstrtab_hdr->sh_offset;
+
+	printf("Sections:\n");
+	for (int i = 0; i < hdr->e_shnum; ++i) {
+		Elf64_Shdr *current_shdr = &shdr_table[i];
+		printf(
+		    "  [%2d] Name: %-20s Type: 0x%x Offset: 0x%lx Size: "
+		    "0x%lx\n",
+		    i, shstrtab + current_shdr->sh_name, current_shdr->sh_type,
+		    current_shdr->sh_offset, current_shdr->sh_size);
+	}
+
+	munmap(elf_data, size__);
+	if (filename)
+		free(filename);
+	return 0;
+}
+
+int test_syscalls() {
 	char *buf = "hello world\n";
 	uint64_t fd = STDOUT_FILENO, len = strlen(buf), status;
 	sys = syscall_arguments("write", 3, fd, (uint64_t)buf, len);
@@ -150,10 +223,8 @@ __inline void file_exists_cwd(char *dirpath,
 			      char *filename,
 			      char *extension_) __compiler_allow_unused;
 
-#include <elf.h>
 #include <glob.h>
 
-static char *filename;
 glob_t globs;
 _Thread_local int value = 0;
 
@@ -174,7 +245,8 @@ struct globResults *find_binary() {
 		break;
 	}
 	p->filename = strdup(filename);
-	free(filename);
+	if (filename)
+		free(filename);
 	globfree(&globs);
 	return p;
 defer:
@@ -185,9 +257,8 @@ defer:
 #elif __x86_64__ && __linux__
 #define ELF_HEADER_SIZE sizeof(Elf64_Ehdr)
 #endif
-char elf[ELF_HEADER_SIZE];
 
-void read_elf_header(char *filename) {
+void *read_elf_header(char *filename) {
 	/* double check file */
 	// _Bool status = false;
 	/*TODO check path exist or execv */
@@ -214,9 +285,7 @@ void read_elf_header(char *filename) {
 		errno = EBADE;
 		goto defer;
 	}
-	memcpy((Elf64_Ehdr *)elf, elf_hdr, read_t);
-	free(elf_hdr);
-	return;
+	return elf_hdr;
 defer:
 	if (res) {
 		free(res->filename);

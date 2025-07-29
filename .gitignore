@@ -1,5 +1,1 @@
-telegram
-*.java
-compiler
-.cache
-crack.md
+elf/*.txt

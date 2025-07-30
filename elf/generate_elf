@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/ksh
 
 OUTPUT="$0".bin
 if [[ "$#" -ge 1 ]]; then

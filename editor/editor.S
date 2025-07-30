@@ -1,7 +1,7 @@
 /* start of something great Jul 17, 25 Alusa why are u topless? 1. 52 in the morning */
 
-#include "include.inc"
-#include "syscall.inc"
+#include "include.S"
+#include "syscall.S"
 
 
 

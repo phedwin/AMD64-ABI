@@ -5,9 +5,43 @@
 #include <termios.h>
 #include <unistd.h>
 
-//^^
+#define allow_unused __attribute__((unused))
 
 struct termios termios;
+static inline char *basename(char *path) {
+	char *bn;
+
+	if (!path)
+		return NULL;
+again:
+	bn = strrchr(path, '/');
+	if (!bn) {
+		/* No slash found, path is basename */
+		return path;
+	}
+	if (bn[1] == '\0') {
+		/* Remove trailing slash */
+		bn[0] = '\0';
+		goto again;
+	}
+	return ++bn;
+}
+#include <assert.h>
+
+#define ASSERT(x)                                                             \
+	do {                                                                  \
+		if (!(x)) {                                                   \
+			fprintf(stderr, "Assertion failed: %s, file %s:%d\n", \
+				#x, __FILE__, __LINE__);                      \
+			abort();                                              \
+		}                                                             \
+	} while (0)
+
+int main(int argc allow_unused, char **argv allow_unused) {
+	allow_unused char *base = NULL;
+	ASSERT(base);
+	return 0;
+}
 
 void die(const char *s) {
 	write(STDOUT_FILENO, "\x1b[2J", 4);
@@ -99,18 +133,4 @@ void initEditor() {
 	if (getWindowSize(&E.screenrows, &E.screencols) == -1)
 		die("getWindowSize");
 	E.screenrows -= 2;
-}
-
-int main(int argc, char **argv) {
-	char flags[1024];
-	size_t offset = 0, buf_t = sizeof flags;
-	for (int p = 0; argv[p]; p++) {
-		int size = 0;
-		if (buf_t > offset)
-			size = snprintf(flags + offset, buf_t, "%s ", argv[p]);
-		offset += size;
-		buf_t -= offset;
-	}
-	printf("%s", flags);
-	return 0;
 }

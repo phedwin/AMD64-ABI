@@ -22,6 +22,7 @@ void div_values(int a, int b, int *rc) {
 	return;
 }
 
+
 struct Ops {
 	char *ops_name;
 	void (*func_ptr)(int, int, int *);

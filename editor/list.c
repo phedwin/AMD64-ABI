@@ -1,6 +1,6 @@
 #include <stdio.h>
-#include <stdlib.h>  // For malloc and free
-#include <string.h>  // For strlen
+#include <stdlib.h>
+#include <string.h>
 
 typedef struct __text {
 	char p;
@@ -9,26 +9,14 @@ typedef struct __text {
 
 Text *head = NULL;
 
-// This function now correctly prepends a new node to the list.
 void append_editor(char value) {
-	// 1. Allocate memory for a new node
 	Text *temp = malloc(sizeof(Text));
-	if (temp == NULL) {
-		printf("Memory allocation failed!\n");
+	if (!temp)
 		return;
-	}
-
-	// 2. Set the data for the new node
 	temp->p = value;
-
-	// 3. Point the new node's 'next' pointer to the current head
 	temp->pp = head;
-
-	// 4. Update the head to point to the new node (making it the new head)
 	head = temp;
 }
-
-// Function to free the allocated memory to prevent leaks
 void free_list(Text *current_head) {
 	Text *temp;
 	while (current_head != NULL) {

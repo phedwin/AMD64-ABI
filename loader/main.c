@@ -1,6 +1,13 @@
 /* basic just start with a static ET_EXEC */
 
 #include <stdint.h>
+#include <sys/stat.h>
+
+#define loop(start, end, incr)                                    \
+	do {                                                      \
+		for (int x = start; x < end; x ? x += incr : x++) \
+			;                                         \
+	} while (0);
 #define __compiler_allow_unused __attribute__((unused))
 
 #include <elf.h>
@@ -23,6 +30,56 @@ __compiler_allow_unused int is_elf(void *mem) {
 		rc = 1;
 	return rc;
 }
+
+typedef struct {
+	void *p;
+	size_t sz;
+} Mem;
+#include <sys/mman.h>
+void *read_file(char *filename) {
+	Mem *m = malloc(sizeof(Mem));
+	struct stat stats;
+	int fd = open(filename, O_RDONLY);
+	if (fd < 0)
+		goto defer;
+	fstat(fd, &stats);
+	m->sz = stats.st_size;
+	void *p = NULL;
+	if ((p = mmap(p, m->sz, PROT_READ, MAP_PRIVATE, fd, SEEK_SET)) ==
+	    MAP_FAILED)
+		goto defer;
+	m->p = p;
+	return m;
+defer:
+	return MAP_FAILED;
+}
+
+int main(int argc, char **argv) {
+	loop(0, 12, 1);
+	FILE *master = fopen("setup.ld", "w+");
+	if (!master)
+		return 0;
+	/* read sections */
+	Mem *mem = read_file(argv[1]);
+	if (mem == MAP_FAILED)
+		exit(EXIT_FAILURE);
+	char *mem_p = mem->p;
+	Elf64_Ehdr *elf64_h = (Elf64_Ehdr *)mem_p;
+
+	Elf64_Shdr *elf64_Sh = (Elf64_Shdr *)(mem_p + elf64_h->e_shoff);
+
+	Elf64_Shdr *shstrtab_hdr = &elf64_Sh[elf64_h->e_shstrndx];
+	char *shstrtab = mem_p + shstrtab_hdr->sh_offset;
+
+	for (int i = 0; i < elf64_h->e_shnum; ++i) {
+		Elf64_Shdr *current_shdr = &elf64_Sh[i];
+		char *p = shstrtab + current_shdr->sh_name;
+	}
+	munmap(mem->p, mem->sz);
+
+	free(mem);
+}
+
 void *_read_elf_hdr(char *filename) {
 	int fd;
 #if defined(__x86_64__) && (__linux__)
@@ -35,16 +92,4 @@ void *_read_elf_hdr(char *filename) {
 	fd = open(filename, O_RDONLY);
 	read(fd, hdr, SIZEOF_HEADERS);
 	return hdr;
-}
-int main(int argc, char **argv) {
-	Elf64_Ehdr *p = _read_elf_hdr(argv[1]);
-	if (!is_elf(p))
-		goto defer;
-
-	__compiler_allow_unused Elf64_Off p_ff = p->e_phoff;
-	Elf64_Half p_nums = p->e_phnum;
-	printf("%hu", p_nums);
-	return EXIT_SUCCESS;
-defer:
-	return EXIT_FAILURE;
 }

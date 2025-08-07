@@ -134,33 +134,31 @@ int main(int argc, char *argv[]) {
 	if (!elf_data)
 		exit(EXIT_FAILURE);
 
-	Elf64_Ehdr *hdr = (Elf64_Ehdr *)elf_data;
+	Elf64_Ehdr *elf64_hdr = (Elf64_Ehdr *)elf_data;
 	/* TODO confirm its an ELF - anyway just proceed this is not production
 	 * code */
 
 	printf("ELF Header:\n");
-	printf("  Entry Point Address: 0x%lx\n", hdr->e_entry);
-	printf("  Section Header Offset: 0x%lx\n", hdr->e_shoff);
-	printf("  Number of Sections: %u\n", hdr->e_shnum);
-	printf("  Section Header String Table Index: %u\n", hdr->e_shstrndx);
-	printf("\n");
+	printf("  Entry Point Address: 0x%lx\n", elf64_hdr->e_entry);
+	printf("  Section Header Offset: 0x%lx\n", elf64_hdr->e_shoff);
+	printf("  Number of Sections: %u\n", elf64_hdr->e_shnum);
+	printf("  Section Header String Table Index: %u\n",
+	       elf64_hdr->e_shstrndx);
 
-	// Get the section header table
-	Elf64_Shdr *shdr_table = (Elf64_Shdr *)(elf_data + hdr->e_shoff);
+	Elf64_Shdr *section_header_tb =
+	    (Elf64_Shdr *)(elf_data + elf64_hdr->e_shoff);
 
-	// Get the section header string table section header
-	if (hdr->e_shstrndx >= hdr->e_shnum) {
-		fprintf(stderr, "Invalid section header string table index.\n");
+	if (elf64_hdr->e_shstrndx >= elf64_hdr->e_shnum) {
 		munmap(elf_data, size__);
 		return 1;
 	}
-	Elf64_Shdr *shstrtab_hdr = &shdr_table[hdr->e_shstrndx];
+	Elf64_Shdr *shstrtab_hdr = &section_header_tb[elf64_hdr->e_shstrndx];
 
 	char *shstrtab = elf_data + shstrtab_hdr->sh_offset;
 
 	printf("Sections:\n");
-	for (int i = 0; i < hdr->e_shnum; ++i) {
-		Elf64_Shdr *current_shdr = &shdr_table[i];
+	for (int i = 0; i < elf64_hdr->e_shnum; ++i) {
+		Elf64_Shdr *current_shdr = &section_header_tb[i];
 		printf(
 		    "  [%2d] Name: %-20s Type: 0x%x Offset: 0x%lx Size: "
 		    "0x%lx\n",

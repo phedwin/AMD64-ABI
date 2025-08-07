@@ -8,18 +8,18 @@ PHDRS {
 }
 
 SECTIONS {
-    . = SIZEOF_HEADERS;
+    . = 0x400000;
 
-    .text ALIGN(0x10) : { 
+    .text ALIGN(0x1000) : { 
         *(.text*) 
         }: text
-    .rodata ALIGN(0x10):  { 
+    .rodata ALIGN(0x1000):  { 
         *(.rodata*) 
         }: data
-    .data ALIGN(0x10): { /*  if not page aligned, this panics? */
+    .data ALIGN(0x1000): { /*  if not page aligned, this panics? */
         *(.data*)
     } : data
-    .bss ALIGN(0x10) : { 
+    .bss ALIGN(0x1000) : { 
         *(.bss)
         *(COMMON) /* is this like -fno-common */
         } : data

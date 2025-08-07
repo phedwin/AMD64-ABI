@@ -4,8 +4,9 @@
     .globl main
     .type main, %function
 main:
-    mov $60, %eax
-    mov $1, %dil
+    // mov $60, %eax
+    // mov $1, %dil
+
     // xor %dil, %dil
     syscall
 
